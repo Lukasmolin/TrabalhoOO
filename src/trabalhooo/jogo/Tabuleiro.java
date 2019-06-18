@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabalhooo;
+package trabalhooo.jogo;
 
 /**
  *
- * @author izabe
+ * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
-public class TrabalhoOO {
+public class Tabuleiro {
+    private Jogador jogadorUm, jogadorDois;
+    private Campo campo;
     
-    public static void main(String[] args) {
+    public Tabuleiro(){
         
     }
-    
 }

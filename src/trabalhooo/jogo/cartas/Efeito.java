@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabalhooo;
+package trabalhooo.jogo.cartas;
 
 /**
  *
- * @author izabe
+ * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
-public class TrabalhoOO {
-    
-    public static void main(String[] args) {
-        
-    }
+public class Efeito {
     
 }
