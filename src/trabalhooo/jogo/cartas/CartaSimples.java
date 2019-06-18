@@ -19,7 +19,7 @@ public class CartaSimples extends CartaPontuada{
      * @param faccao Faccao da carta
      * @param pontuacao pontuacao inicial da carta
      */
-    public CartaSimples(String nome, Carta.Faccao faccao, int pontuacao){
+    public CartaSimples(String nome, Faccao faccao, int pontuacao){
         super(nome, faccao, pontuacao);
     }
     

@@ -16,14 +16,15 @@ import java.util.List;
  */
 public final class Baralho {
     private List<Carta> baralho; 
-    private Carta.Faccao faccao;
+    private Faccao faccao;
+    private boolean comecou = false; 
+    private int troca = 0; //Trocas d ecarta iniciais
     
     /**
      * Contrutor do baralho com a facção desejada
      * @param faccao faccao do baralho
-     * @throws Exception se a facção for inválida
      */
-    public Baralho(Carta.Faccao faccao) throws Exception{
+    public Baralho(Faccao faccao) {
         this.faccao = faccao;
         reiniciarBaralho(faccao);
     }
@@ -31,21 +32,54 @@ public final class Baralho {
     /**
      * Reinicia o baralho com uma facção
      * @param faccao facção com a qual reiniciar o baralho
-     * @throws Exception se a faccção for inválida
      */
-    public void reiniciarBaralho(Carta.Faccao faccao) throws Exception{
+    public void reiniciarBaralho(Faccao faccao){
         this.faccao = faccao;
         switch (faccao){
             case MONSTROS:
                 baralho = getMonstros();
                 break;
+            case NILFGAARD:
+                System.out.println("NILFGAARD AINDA NÃO IMPLEMENTADO!");
+                break;
+            case REINO_DO_NORTE:
+                System.out.println("REINO DO NORTE AINDA NAO IMPLEMENTADO!");
+                break;
+            case SCOIATAEL:
+                System.out.println("SCOIATAEL AINDA NAO IMPLEMENTADO!");
+                break;
             default:
-                throw new Exception("Faccao inválida");
+                baralho = getMonstros(); //Temporário
         }
     }
     
-    public Carta[] getCartasIniciais(){
-        return null; //A fazer
+    /**
+     * Retorna as cartas iniciais do jogo
+     * @return Array de 10 cartas iniciais do jogo
+     * @throws Exception se Já pediu as Cartas Iniciais
+     */
+    public Carta[] getCartasIniciais() throws Exception{
+        if(comecou) { throw new Exception("Já pediu as cartas iniciais, reinicie o Baralho!"); }
+        
+        comecou = true;
+        Carta[] cartasIniciais = new Carta[10];
+        cartasIniciais = baralho.subList(0, 10).toArray(cartasIniciais);
+        baralho.removeAll(baralho.subList(0, 10));
+        return cartasIniciais;
+    }
+    
+    /**
+     * Troca uma carta por outra do baralho
+     * @param carta Carta a ser devolvida ao deck
+     * @return Carta nova recebida se a troca for possivel, null se não tiver mais trocas
+     */
+    public Carta trocaCarta(Carta carta){
+        if(troca >= 3)
+            return null;
+        
+        this.troca++;
+        baralho.add(carta);
+        return baralho.get(0);
     }
     
     /**
@@ -54,7 +88,7 @@ public final class Baralho {
      */
     private static List<Carta> getMonstros(){
         List<Carta> monstros = new ArrayList<>();
-        Carta.Faccao faccao = Carta.Faccao.MONSTROS;
+        Faccao faccao = Faccao.MONSTROS;
         monstros.add(new CartaSimples("Earth Elemental",faccao,3));
         monstros.add(new CartaSimples("Aracha",faccao,1));
         monstros.add(new CartaSimples("Cockatrice",faccao,2));
@@ -96,9 +130,7 @@ public final class Baralho {
         monstros.add(new CartaSimples("Wyvern",faccao,2));
         Collections.shuffle(monstros); //Mistura a lista
         return monstros;
-    }
-    
-    
+    }  
     
     
     

@@ -12,7 +12,7 @@ package trabalhooo.jogo.cartas;
 public abstract class CartaPontuada extends Carta{
     private int pontuacao;
     
-    protected CartaPontuada(String nome, Carta.Faccao faccao, int pontuacao){
+    protected CartaPontuada(String nome, Faccao faccao, int pontuacao){
         super(nome, faccao);
         this.pontuacao = pontuacao;
     }

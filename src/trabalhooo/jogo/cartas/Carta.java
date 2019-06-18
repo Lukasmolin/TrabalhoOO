@@ -38,13 +38,6 @@ public abstract class Carta {
     }
     
     /**
-     * Tipos de Facção disponiveis para a carta
-     */
-    public enum Faccao {
-        MONSTROS, NILFGAARD, SCOIATAEL, REINO_DO_NORTE
-    }
-    
-    /**
      * Retorna o nome da carta
      * @return Nome da carta 
      */

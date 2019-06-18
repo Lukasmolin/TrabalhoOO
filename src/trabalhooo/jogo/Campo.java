@@ -9,6 +9,6 @@ package trabalhooo.jogo;
  *
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
-class Campo {
+public class Campo {
     
 }
