@@ -22,6 +22,7 @@ public class Jogador {
     private Baralho baralho;
     private List<Carta> mao;
     private int vidas = 3;
+    private boolean pronto = false;
     
     /**
      * Contrutor do Jogador
@@ -66,6 +67,7 @@ public class Jogador {
        //Retira as 10 primeiras cartas e passa para mão
        mao = new ArrayList<>();
        mao.addAll(java.util.Arrays.asList(baralho.getCartasIniciais()));
+       this.pronto = true;
     }
     
     /**
@@ -85,22 +87,35 @@ public class Jogador {
     /**
      * Retorna mão atual do jogador
      * @return Array de Cartas com as cartas na mão do jogador
+     * @throws Exception Se o jogador ainda não estiver pronto
      */
-    public Carta[] getMao(){
-        Carta[] retornoMao = new Carta[mao.size()];
-        retornoMao = mao.toArray(retornoMao);
-        return retornoMao;
+    public Carta[] getMao() throws Exception{
+        if(pronto){
+            Carta[] retornoMao = new Carta[mao.size()];
+            retornoMao = mao.toArray(retornoMao);
+            return retornoMao;
+        }
+        throw new Exception("Jogador ainda não está pronto!");    
     }
     
     /**
      * Joga uma carta especificada
      * @param carta Carta a ser jogada
      * @return a Carta se a jogada foi feita, null se o jogador nao possuir a carta na mao
+     * @throws Exception se o jogador não possuir a carta
      */
-    public Carta jogaCarta(Carta carta){
+    public Carta jogaCarta(Carta carta) throws Exception{
         if(mao.remove(carta))
             return carta;
         else
-            return null;
+            throw new Exception("Erro! A carta não pertence ao jogador!");
+    }
+    
+    /**
+     * Retorna se o jogador está pronto para começar a jogar
+     * @return true se está pronto, false senão
+     */
+    public boolean estaPronto(){
+        return this.pronto;
     }
 }

@@ -18,12 +18,8 @@ public class Fileira {
     /**
      *Lista de Cartas na fileira
      */
-    private List<Carta> fileira;
-    private int pontuacao;
-    
-    public Fileira(){
-        fileira = new ArrayList<>();
-    }
+    private List<Carta> fileira = new ArrayList<>();
+    private int pontuacao = 0;
     
     /**
      * Adiciona carta a esta fileira
@@ -35,8 +31,8 @@ public class Fileira {
     }
     
     /**
-     * Retorna as cartas contidas na fileira
-     * @return array de Carta contida na fileira
+     * Retorna uma cópia das cartas contidas na fileira
+     * @return array cópia de Carta contida na fileira
      */
     public Carta[] getCartas(){
         Carta[] c = new Carta[fileira.size()];
@@ -52,6 +48,18 @@ public class Fileira {
     }
     
     /**
+     * Queima uma carta na fileira
+     * @param carta Carta a ser queimada
+     * @return Carta que foi queimada
+     * @throws Exception se a carta não existir ou se a carta for null
+     */
+    public Carta queimaCarta(Carta carta) throws Exception{
+        if(carta == null) { throw new Exception("Carta inválida: Null!"); }
+        if(!fileira.remove(carta)) { throw new Exception("Carta não existente na fileira!"); }
+        return carta;        
+    }
+    
+    /**
      * Itera pelas cartas e se for CartaPontuada soma a pontuacao
      */
     private void atualizaPontuacao(){
@@ -61,5 +69,23 @@ public class Fileira {
                 pontuacao += ((CartaPontuada)c).getPontuacao();
             }
         }
+    }
+    
+    /**
+     * Mata todas as cartas da fileira e as retorna. A Fileira ficará vazia.
+     * @return Array de carta com as cartas mortas retiradas da fileira
+     */
+    public Carta[] finalizaRodada(){
+        Carta[] mortas = getCartas();
+        fileira.clear();
+        return mortas;
+    }
+    
+    /**
+     * Retorna o metodo size() da List interna que representa a fileira
+     * @return Quantidade de carta na fileira, zero se vazia
+     */
+    public int quantidadeCartas(){
+        return fileira.size();
     }
 }

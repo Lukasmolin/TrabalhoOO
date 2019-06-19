@@ -7,6 +7,9 @@ package trabalhooo;
 
 import java.util.ArrayList;
 import java.util.List;
+import trabalhooo.jogo.*;
+import trabalhooo.jogo.cartas.Faccao;
+import trabalhooo.jogo.cartas.Carta;
 
 /**
  *
@@ -15,32 +18,39 @@ import java.util.List;
 public class TrabalhoOO {
     
     public static void main(String[] args) {
-        List<String> l = new ArrayList<>();
-        String[] arr = new String[10];
-        
-        for(int i = 0; i < 20; i++){
-            l.add("Teste: " + i);
+        Jogo j = new Jogo("Zé", "Maria");
+        j.setFaccaoJogadorUm(Faccao.MONSTROS);
+        j.setFaccaoJogadorDois(Faccao.MONSTROS);
+        if(j.estaPronto()){
+            imprimeMao(j.getMaoJogadorUm(), j.getNomeJogadorUm());
+            imprimeMao(j.getMaoJogadorDois(), j.getNomeJogadorDois());
         }
-        
-        System.out.println("Imprimindo lista:");
-        for(String s : l){
-            System.out.println(s);
+    }
+    
+    public static void imprimeCampo(Carta[][] campo){
+        System.out.println("################################");
+        for(Carta[] fileira : campo){
+            System.out.println("---------------------------");
+            imprimeFileira(fileira);
+            System.out.println("---------------------------");
         }
-        
-        arr = l.subList(0, 10).toArray(arr);
-        l.removeAll(l.subList(0, 10));
-        
-        System.out.println("Imprimindo o array:");
-        for(String s : arr){
-            System.out.println(s);
+        System.out.println("################################");
+    }
+    
+    public static void imprimeFileira(Carta[] fileira){
+        for(Carta carta : fileira){
+            System.out.print("| "+ carta.getNome() +" |");
         }
-        
-        System.out.println("Imprimindo a Lista de novo");
-        for(String s : l){
-            System.out.println(s);
+    }
+    
+    public static void imprimeMao(Carta[] cartas, String nomeJogador){
+        System.out.println("################################");
+        System.out.println("JOGADOR: " + nomeJogador);
+        for(Carta carta : cartas){
+            System.out.print("| "+ carta.getNome() +" |");
         }
-        
-        
+        System.out.println();
+        System.out.println("################################");
     }
     
 }
