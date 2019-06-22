@@ -3,7 +3,7 @@ package trabalhooo.gui.elementos;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class JogadorGUI {
+public class JogadorGUI implements ElementoGUI {
     private String nome;
     private int vidas;
     private JPanel component;
@@ -62,11 +62,8 @@ public class JogadorGUI {
         return this.vidas;
     }
 
-    /**
-     * Adiciona o elemento deste Jogador ao JPanel pai passado como parametro
-     * @param pai Elemento pai
-     */
-    public void adicionarAoPanel(JPanel pai){
+    @Override
+    public void adicionarAoPanel(JPanel pai) {
         pai.add(component);
     }
 }

@@ -5,8 +5,13 @@ import javax.swing.JPanel;
 
 import trabalhooo.gui.elementos.*;
 
+/**
+ * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
+ */
 public class Gui {
+    //Frame da interface grafica
     private JFrame frame;
+    //JPanel principal que contém todos os outros
     private JPanel janela;
     private GuiListener control;
     private JogadorGUI[] jogadores = new JogadorGUI[2];
