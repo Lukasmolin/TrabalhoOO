@@ -118,4 +118,12 @@ public class Jogador {
     public boolean estaPronto(){
         return this.pronto;
     }
+    
+    /**
+     * Retorna o baralho do jogador
+     * @return 
+     */
+    public Baralho getBaralho(){
+        return this.baralho;
+    }
 }

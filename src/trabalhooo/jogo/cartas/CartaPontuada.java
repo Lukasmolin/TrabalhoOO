@@ -21,15 +21,16 @@ public abstract class CartaPontuada extends Carta{
      * Retorna a pontuação
      * @return a pontuação da CartaPontuada
      */
+    @Override
     public int getPontuacao(){
         return pontuacao;
     }
     
     /**
      * Altera a pontuação da carta pelo valor passado, adicionando/subtraindo o valor dependendo se positivo ou negativo
-     * @param mudanca Valores negativos para subtrair e positivos para adicionar
      */
-    public void alteraPpontuacao(int mudanca){
-        this.pontuacao += mudanca;
+    @Override
+    public void setPontuacao(int novaPontuacao){
+        this.pontuacao = novaPontuacao;
     }
 }

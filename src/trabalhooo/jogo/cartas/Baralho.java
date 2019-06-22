@@ -83,6 +83,14 @@ public final class Baralho {
     }
     
     /**
+     * 
+     * @return retorna o baralho do jogador
+     */
+    public List getBaralho(){
+        return this.baralho;
+    }
+    
+    /**
      * Gera um baralho novo da Facção Monstros
      * @return Lista de cartas contendo o baralho
      */

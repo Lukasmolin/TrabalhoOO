@@ -74,4 +74,33 @@ public class Campo {
         }
         return pontuacao;
     }
+    
+    
+    /**
+     * Adiciona carta
+     * @param carta 
+     */
+    public void addCarta(Carta carta){
+        switch (carta.getFileira()){
+            case 1:
+                campo[FILEIRA_ESPADACHINS].add(carta);
+            break;
+            
+            case 2:
+                campo[FILEIRA_ARQUEIROS].add(carta);
+            break;
+            
+            case 3:
+                campo[FILEIRA_BALISTAS].add(carta);
+            break;
+        }
+    }
+    
+    /**
+     * 
+     * @return Retorna o cemiterio
+     */
+    public List getCemiterio(){
+        return this.cemiterio;
+    }
 }

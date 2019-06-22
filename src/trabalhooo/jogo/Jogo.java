@@ -6,6 +6,7 @@
 package trabalhooo.jogo;
 
 import trabalhooo.jogo.cartas.*;
+import java.util.Random;
 
 /**
  *
@@ -15,6 +16,9 @@ public class Jogo {
     private boolean pronto = false;
     private Jogador jogadorUm, jogadorDois;
     private Tabuleiro tabuleiro;
+    private int contaJogadas = 0;
+    private boolean fimdeJogo = false;
+    private boolean fimdeRodada = false;
     
     /**
      * 
@@ -99,6 +103,82 @@ public class Jogo {
      */
     public boolean estaPronto(){
         return this.jogadorUm.estaPronto() && this.jogadorDois.estaPronto();
+    }
+    
+    /**
+     * Determina jogador inicial
+     */
+    public  Jogador jogadorInicial(){
+        
+        Random x = new Random();
+        int sorte = x.nextInt(3);
+        if (sorte==0){
+            return jogadorUm;
+        }
+        else 
+            return jogadorDois;
+    }
+    
+    /**
+     * Inicia o jogo com 0 jogadas, muda o jogador ativo conforme as jogadas avançam
+     * @return o jagador ativo no momento
+     */
+    public Jogador getJogadorAtual(){
+        Jogador jogadorInicial = jogadorInicial();
+        if(jogadorInicial == jogadorUm){
+            while (fimdeJogo==false){
+                while (fimdeRodada==false){
+                    if(contaJogadas%2 == 0){
+                        return jogadorUm;
+                    }
+                    else 
+                        return jogadorDois;
+                }
+            }
+        }
+        else 
+            while (fimdeJogo==false){
+                while (fimdeRodada==false){
+                    if(contaJogadas%2 == 0){
+                        return jogadorDois;
+                    }
+                    else 
+                        return jogadorUm;
+                }
+            }
+        
+        return null;     
+    }
+    
+    /**
+     * Retorna o jogador em espera
+     * @return 
+     */
+    public Jogador getJogadorEmEspera(){
+        Jogador jogadorInicial = jogadorInicial();
+        if(jogadorInicial == jogadorUm){
+            while (fimdeJogo==false){
+                while (fimdeRodada==false){
+                    if(contaJogadas%2 == 0){
+                        return jogadorDois;
+                    }
+                    else 
+                        return jogadorUm;
+                }
+            }
+        }
+        else 
+            while (fimdeJogo==false){
+                while (fimdeRodada==false){
+                    if(contaJogadas%2 == 0){
+                        return jogadorUm;
+                    }
+                    else 
+                        return jogadorDois;
+                }
+            }
+        
+        return null;     
     }
     
     

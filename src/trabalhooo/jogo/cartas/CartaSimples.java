@@ -22,9 +22,10 @@ public class CartaSimples extends CartaPontuada{
     public CartaSimples(String nome, Faccao faccao, int pontuacao){
         super(nome, faccao, pontuacao);
     }
-    
+
     @Override
-    public Efeito getEfeito(){
-        return new Efeito();
+    public void getEfeito(Efeito efeito) {
+     ;   
     }
+
 }

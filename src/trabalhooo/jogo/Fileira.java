@@ -27,6 +27,7 @@ public class Fileira {
      */
     public void add(Carta carta){
         fileira.add(carta);
+        carta.getEfeito();
         atualizaPontuacao();
     }
     

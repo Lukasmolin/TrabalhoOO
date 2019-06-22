@@ -6,6 +6,7 @@
 package trabalhooo.jogo;
 
 import trabalhooo.jogo.cartas.Carta;
+import trabalhooo.jogo.Jogo;
 
 /**
  *
@@ -43,14 +44,15 @@ public class Tabuleiro {
      * Retorna o campo do Jogador passado
      * @param jogador Jogador dono do Campo
      * @return Campo do Jogador
-     * @throws Exception se o Jogador não for igual a nenhum dos dois jogadores
      */
-    public Campo getCampoDoJogador(Jogador jogador) throws Exception{
+    public Campo getCampoDoJogador(Jogador jogador){
         if(jogador.equals(jogadorUm)){
             return campoUm;
         } else if (jogador.equals(jogadorDois)){
             return campoDois;
         }
-        throw new Exception("Jogador Inválido!!!");
+        return null; 
     }
+    
+    
 }
