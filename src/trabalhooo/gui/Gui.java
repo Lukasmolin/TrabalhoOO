@@ -1,17 +1,21 @@
 package trabalhooo.gui;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import trabalhooo.gui.elementos.*;
 
 public class Gui {
     private JFrame frame;
     private JPanel janela;
-    private JPanel[] jogadores = new JPanel[2];
+    private GuiListener control;
+    private JogadorGUI[] jogadores = new JogadorGUI[2];
     
-
+    /**
+     * @deprecated Contrutor de testes sem parametros com valores padrão
+     */
     public Gui(){
-        inicializarFrame("Gwent", 640, 320);
+        inicializaFrame("Gwent", 640, 320);
         inicializaJogador("nomeJogadorUm", "nomeJogadorDois");
     }
 
@@ -24,7 +28,8 @@ public class Gui {
      * @param altura altura da janela
      */
     public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, int largura, int altura){
-        inicializarFrame(titulo, largura, altura);
+        inicializaFrame(titulo, largura, altura);
+        inicializaJogador(nomeJogadorUm, nomeJogadorDois);
     }
 
     /**
@@ -33,7 +38,7 @@ public class Gui {
      * @param largura largura do JFrame
      * @param altura altura do JFrame
      */
-    private void inicializarFrame(String titulo, int largura, int altura){
+    private void inicializaFrame(String titulo, int largura, int altura){
         frame = new JFrame("Teste");
         frame.setSize(largura, altura);
         janela = new JPanel();
@@ -49,27 +54,35 @@ public class Gui {
         frame.setVisible(true);
     }
 
+    
+
     /**
      * inicializa a propriedade jogadores[2] com as informações dos jogadores
      * @param nomeJogadorUm nome do primeiro jogador
      * @param nomeJogadorDois nome do segundo jogador
      */
     private void inicializaJogador(String nomeJogadorUm, String nomeJogadorDois){
-        aux_inicializaJogador(jogadores[0], nomeJogadorUm);
-        aux_inicializaJogador(jogadores[1], nomeJogadorDois);
+        jogadores[0] = new JogadorGUI(nomeJogadorUm, 3);
+        jogadores[1] = new JogadorGUI(nomeJogadorDois, 3);
+        jogadores[0].adicionarAoPanel(janela);
+        jogadores[1].adicionarAoPanel(janela);
     }
 
-    private void aux_inicializaJogador(JPanel jogador, String nome){
-        jogador = new JPanel();
-        JLabel nome_rotulo = new JLabel("Nome:");
-        JLabel nome_info = new JLabel(nome);
-        JLabel vidas_rotulo = new JLabel("Vidas: ");
-        JLabel vidas_info = new JLabel("3");
-        jogador.add(nome_rotulo);
-        jogador.add(nome_info);
-        jogador.add(vidas_rotulo);
-        jogador.add(vidas_info);
-        janela.add(jogador);
+    /**
+     * seta o valor da vida do jogador
+     * @param vida Vida atual
+     */
+    public void setVidaJogadorUm(int vida){
+        jogadores[0].setVidas(vida);
     }
+
+    /**
+     * seta o valor da vida do jogador
+     * @param vida Vida atual
+     */
+    public void setVidaJogadorDois(int vida){
+        jogadores[1].setVidas(vida);
+    }
+   
 
 }
