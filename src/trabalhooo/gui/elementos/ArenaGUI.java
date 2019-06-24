@@ -5,5 +5,5 @@ package trabalhooo.gui.elementos;
  * e pontuações de ambos os jogadores
  */
 public class ArenaGUI {
-
+    
 }

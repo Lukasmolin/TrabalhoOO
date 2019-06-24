@@ -8,9 +8,7 @@ import trabalhooo.gui.elementos.*;
 /**
  * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
  */
-public class Gui {
-    //Frame da interface grafica
-    private JFrame frame;
+public class Gui extends JFrame implements Runnable{
     //JPanel principal que contém todos os outros
     private JPanel janela;
     private GuiListener control;
@@ -44,22 +42,12 @@ public class Gui {
      * @param altura altura do JFrame
      */
     private void inicializaFrame(String titulo, int largura, int altura){
-        frame = new JFrame("Teste");
-        frame.setSize(largura, altura);
+        this.setTitle(titulo);
+        this.setSize(largura, altura);
         janela = new JPanel();
-        frame.getContentPane().add(janela);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    /**
-     * Torna visivel a interface gráfica.
-     * Encapsula o método JFrame.setVisible(true)
-     */
-    public void mostrar(){
-        frame.setVisible(true);
-    }
-
-    
+        this.getContentPane().add(janela);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }  
 
     /**
      * inicializa a propriedade jogadores[2] com as informações dos jogadores
@@ -69,8 +57,8 @@ public class Gui {
     private void inicializaJogador(String nomeJogadorUm, String nomeJogadorDois){
         jogadores[0] = new JogadorGUI(nomeJogadorUm, 3);
         jogadores[1] = new JogadorGUI(nomeJogadorDois, 3);
-        jogadores[0].adicionarAoPanel(janela);
-        jogadores[1].adicionarAoPanel(janela);
+        janela.add(jogadores[0]);
+        janela.add(jogadores[1]);
     }
 
     /**
@@ -88,6 +76,18 @@ public class Gui {
     public void setVidaJogadorDois(int vida){
         jogadores[1].setVidas(vida);
     }
-   
+
+    /**
+     * Seta o controller pra esta Gui
+     * @param controller Listener pra esta Gui
+     */
+    public void setGuiListener(GuiListener controller){
+        this.control = controller;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Run!");
+    }
 
 }

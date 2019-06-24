@@ -2,17 +2,17 @@ package trabalhooo.gui.elementos;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import com.sun.prism.Image;
 
-public class CartaGUI implements ElementoGUI {
-    //Elementos da Carta
+public class CartaGUI extends JPanel {
+    // Elementos da Carta
     private final String nome;
     private final String descricao;
     private final int pontuacao;
 
     //Elementos da interface;
-    private JPanel carta = new JPanel();
     private JLabel nome_rotulo = new JLabel("Nome:");
     private JLabel pontuacao_rotulo = new JLabel("Pontuação:");
     private JLabel nome_info = new JLabel();
@@ -42,11 +42,11 @@ public class CartaGUI implements ElementoGUI {
         descricao_info.setText(this.descricao);
 
         //Adiciona os elementos ao container
-        carta.add(this.nome_rotulo);
-        carta.add(this.nome_info);
-        carta.add(this.pontuacao_rotulo);
-        carta.add(this.pontuacao_info);
-        carta.add(this.descricao_info);
+        this.add(this.nome_rotulo);
+        this.add(this.nome_info);
+        this.add(this.pontuacao_rotulo);
+        this.add(this.pontuacao_info);
+        this.add(this.descricao_info);
     }
 
     /**
@@ -83,11 +83,5 @@ public class CartaGUI implements ElementoGUI {
     public Image getImage() throws Exception{
         throw new Exception("Metodo ainda não implementado!");
     }
-
-    @Override
-    public void adicionarAoPanel(JPanel pai) {
-        pai.add(carta);
-    }
-
 
 }

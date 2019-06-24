@@ -3,10 +3,9 @@ package trabalhooo.gui.elementos;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class JogadorGUI implements ElementoGUI {
+public class JogadorGUI extends JPanel{
     private String nome;
     private int vidas;
-    private JPanel component;
     private JLabel nome_info;
     private JLabel vidas_info;
 
@@ -29,13 +28,13 @@ public class JogadorGUI implements ElementoGUI {
      * Inicializa os componentes Swing referentes ao Jogador
      */
     private void inicializar(){
-        component = new JPanel();        
+        this.removeAll();    
         nome_info = new JLabel(this.nome);
         vidas_info = new JLabel(Integer.toString(this.vidas));
-        component.add(nome_rotulo);
-        component.add(nome_info);
-        component.add(vidas_rotulo);
-        component.add(vidas_info);
+        this.add(nome_rotulo);
+        this.add(nome_info);
+        this.add(vidas_rotulo);
+        this.add(vidas_info);
     }
 
     /**
@@ -62,8 +61,4 @@ public class JogadorGUI implements ElementoGUI {
         return this.vidas;
     }
 
-    @Override
-    public void adicionarAoPanel(JPanel pai) {
-        pai.add(component);
-    }
 }
