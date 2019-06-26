@@ -5,8 +5,7 @@
  */
 package trabalhooo.jogo;
 
-import trabalhooo.jogo.cartas.Carta;
-import trabalhooo.jogo.Jogo;
+import trabalhooo.jogo.cartas.CartaLider;
 
 /**
  *
@@ -53,6 +52,15 @@ public class Tabuleiro {
         }
         return null; 
     }
+    
+    /**
+     * 
+     */
+    public void setLider(){
+        campoUm.setLider(jogadorUm.getLider());
+        campoDois.setLider(jogadorDois.getLider());
+    }
+    
     
     
 }

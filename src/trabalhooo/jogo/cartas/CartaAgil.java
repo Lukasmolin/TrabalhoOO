@@ -6,36 +6,31 @@
 package trabalhooo.jogo.cartas;
 
 /**
- *
+ * Construtor de CartaAgil
  * @author izabe
  */
-public class CartaEspiao extends CartaPontuada{
-    
+public class CartaAgil extends CartaPontuada{
+
     private final String descricao;
 
-    public CartaEspiao(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+    public CartaAgil(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
         super(nome, faccao, fileira, tipo, pontuacao);
-        this.descricao = "Permite comprar duas cartas do baralho, mas deve ser posicionada nas fileiras adversárias, ou seja, sua pontuação vai somar para o inimigo. ";
+        this.descricao = "Pode ser colocada tanto na fileira de combate corporal como em combate a distância.";
     }
     
     
-    
     /**
-     * Retorna a descricao
+     * Retorna descricao
      * @return 
      */
     public String getDescricao(){
         return this.descricao;
     }
     
-    /**
-     * 
-     * @param efeito 
-     */
     @Override
     public void getEfeito(Efeito efeito) {
-        efeito.CartaEspiao(this);
         
+        efeito.CartaAgil(this);
     }
     
 }

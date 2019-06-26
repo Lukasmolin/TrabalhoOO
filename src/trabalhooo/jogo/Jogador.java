@@ -23,6 +23,7 @@ public class Jogador {
     private List<Carta> mao;
     private int vidas = 3;
     private boolean pronto = false;
+    private boolean  passou =  false;
     
     /**
      * Contrutor do Jogador
@@ -125,5 +126,9 @@ public class Jogador {
      */
     public Baralho getBaralho(){
         return this.baralho;
+    }
+    
+    public Carta getLider(){
+        return this.baralho.getLider();
     }
 }

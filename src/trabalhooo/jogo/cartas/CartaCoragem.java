@@ -9,33 +9,40 @@ package trabalhooo.jogo.cartas;
  *
  * @author izabe
  */
-public class CartaEspiao extends CartaPontuada{
+public class CartaCoragem extends CartaPontuada{
     
     private final String descricao;
 
-    public CartaEspiao(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+    public CartaCoragem(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
         super(nome, faccao, fileira, tipo, pontuacao);
-        this.descricao = "Permite comprar duas cartas do baralho, mas deve ser posicionada nas fileiras adversárias, ou seja, sua pontuação vai somar para o inimigo. ";
+        this.descricao = "Invoca de uma vez todas as outras cartas de mesmo tipo.";
     }
+    
+    /**
+     * Construtor da classe CartaCoragem
+     * @param nome
+     * @param faccao
+     * @param pontuacao 
+     */
+    
+    
     
     
     
     /**
-     * Retorna a descricao
+     * Retorna descrição
      * @return 
      */
     public String getDescricao(){
         return this.descricao;
     }
-    
     /**
      * 
      * @param efeito 
      */
     @Override
     public void getEfeito(Efeito efeito) {
-        efeito.CartaEspiao(this);
-        
+        efeito.CartaCoragem(this);
     }
     
 }

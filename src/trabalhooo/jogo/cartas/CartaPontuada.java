@@ -11,11 +11,13 @@ package trabalhooo.jogo.cartas;
  */
 public abstract class CartaPontuada extends Carta{
     private int pontuacao;
-    
-    protected CartaPontuada(String nome, Faccao faccao, int pontuacao){
-        super(nome, faccao);
+
+    public CartaPontuada(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+        super(nome, faccao, fileira, tipo);
         this.pontuacao = pontuacao;
     }
+    
+    
     
     /**
      * Retorna a pontuação
