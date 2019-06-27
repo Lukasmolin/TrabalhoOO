@@ -1,5 +1,7 @@
 package trabalhooo.gui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -9,6 +11,8 @@ import trabalhooo.gui.elementos.*;
  * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
  */
 public class Gui extends JFrame implements Runnable{
+    private static Dimension TAMANHO = new Dimension(640, 480);
+
     //JPanel principal que contém todos os outros
     private JPanel janela;
     private GuiListener control;
@@ -18,7 +22,7 @@ public class Gui extends JFrame implements Runnable{
      * @deprecated Contrutor de testes sem parametros com valores padrão
      */
     public Gui(){
-        inicializaFrame("Gwent", 640, 320);
+        inicializaFrame("Gwent");
         inicializaJogador("nomeJogadorUm", "nomeJogadorDois");
     }
 
@@ -31,19 +35,49 @@ public class Gui extends JFrame implements Runnable{
      * @param altura altura da janela
      */
     public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, int largura, int altura){
-        inicializaFrame(titulo, largura, altura);
+        inicializaFrame(titulo);
+        setDimensao(new Dimension(largura, altura));
         inicializaJogador(nomeJogadorUm, nomeJogadorDois);
     }
 
+    /**
+     * Construtor com parametros
+     * @param titulo titulo da janela
+     * @param nomeJogadorUm nome do jogador um
+     * @param nomeJogadorDois nome do jogador dois
+     * @param tamanho Dimensão da janela
+     */
+    public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, Dimension tamanho){
+        inicializaFrame(titulo);
+        setDimensao(new Dimension(tamanho));
+        inicializaJogador(nomeJogadorUm, nomeJogadorDois);
+    }
+
+    /**
+     * Seta o tamanho do frame
+     * @param tamanho dimensão do frame
+     */
+    public static void setDimensao(Dimension tamanho){
+        TAMANHO = tamanho;
+    }
+
+    /**
+     * Retorna o tamanho do frame
+     * @return Dimensão do frame
+     */
+    public static Dimension getDimensao(){
+        return new Dimension(TAMANHO);
+    }
+    
     /**
      * Inicializa o JFrame e o Jpanel principal
      * @param titulo titulo do JFrame
      * @param largura largura do JFrame
      * @param altura altura do JFrame
      */
-    private void inicializaFrame(String titulo, int largura, int altura){
+    private void inicializaFrame(String titulo){
         this.setTitle(titulo);
-        this.setSize(largura, altura);
+        this.setSize(TAMANHO);
         janela = new JPanel();
         this.getContentPane().add(janela);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,8 +89,8 @@ public class Gui extends JFrame implements Runnable{
      * @param nomeJogadorDois nome do segundo jogador
      */
     private void inicializaJogador(String nomeJogadorUm, String nomeJogadorDois){
-        jogadores[0] = new JogadorGUI(nomeJogadorUm, 3);
-        jogadores[1] = new JogadorGUI(nomeJogadorDois, 3);
+        jogadores[0] = new JogadorGUI(nomeJogadorUm, "BaralhoUm", 3);
+        jogadores[1] = new JogadorGUI(nomeJogadorDois, "BaralhoDois", 3);
         janela.add(jogadores[0]);
         janela.add(jogadores[1]);
     }

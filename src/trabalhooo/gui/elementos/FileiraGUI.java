@@ -1,22 +1,27 @@
 package trabalhooo.gui.elementos;
 
-import javax.swing.JLabel;
+import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-public class FileiraGUI extends JScrollPane {
-    private JPanel fileira = new JPanel();
+public class FileiraGUI extends JPanel {
+    //ID Serializavel
+    private static final long serialVersionUID = -4696099802481110108L;
+    //private Dimension tamanho = new Dimension();
 
-    public FileiraGUI(){
-        this.setViewportView(fileira);
-        this.setVisible(true);
+    
+
+    public FileiraGUI() {
+        setLayout(new FlowLayout());
     }
 
     /**
-     * Atualiza as carats na fileira 
+     * Atualiza as carats na fileira
      * @param cartas cartas na fileira
      */
     public void setFileira(CartaGUI[] cartas) {
-        // A fazer
+        
     }
+
+    
 }
