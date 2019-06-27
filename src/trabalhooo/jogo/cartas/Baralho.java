@@ -265,7 +265,11 @@ public final class Baralho {
         ScoiaTael.add(new CartaCoragem("Havekar Smuggler II",faccao,1,"Smuggler",5));
         ScoiaTael.add(new CartaCoragem("Havekar Smuggler III",faccao,1,"Smuggler",5));
         ScoiaTael.add(new CartaAumentoMoral("Isengrim Faoiltiarna",faccao,1,"Unit",10));
-        ScoiaTael.add(new CartaSimples("Mahakaman Defender",faccao,1,"Unit",5));
+        ScoiaTael.add(new CartaSimples("Mahakaman Defender I",faccao,1,"Unit",5));
+        ScoiaTael.add(new CartaSimples("Mahakaman Defender II",faccao,1,"Unit",5));
+        ScoiaTael.add(new CartaSimples("Mahakaman Defender III",faccao,1,"Unit",5));
+        ScoiaTael.add(new CartaSimples("Mahakaman Defender IV",faccao,1,"Unit",5));
+        ScoiaTael.add(new CartaSimples("Mahakaman Defender V",faccao,1,"Unit",5));
         ScoiaTael.add(new CartaAgil("Filavandrel aen Fidhail",faccao,2,"Unit",6));
         ScoiaTael.add(new CartaAgil("Ciaran aep Easnillien",faccao,2,"Unit",3));
         ScoiaTael.add(new CartaAgil("Barclay Els",faccao,2,"Unit",6));
@@ -289,7 +293,8 @@ public final class Baralho {
         ScoiaTael.add(new CartaSimples("Ida Emean aep Sivney",faccao,2,"Unit",6));
         ScoiaTael.add(new CartaHeroi("Saesenthessis",faccao,2,"Hero",10));
         ScoiaTael.add(new CartaSimples("Riordain",faccao,2,"Unit",1));
-        ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit",faccao,2,"Unit",4));
+        ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit I",faccao,2,"Unit",4));
+        ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit II",faccao,2,"Unit",4));
         ScoiaTael.add(new CartaSimples("Toruviel",faccao,2,"Unit",2));
         
         
