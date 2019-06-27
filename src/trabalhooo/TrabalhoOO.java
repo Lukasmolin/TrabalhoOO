@@ -7,9 +7,12 @@ package trabalhooo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import trabalhooo.jogo.*;
-import trabalhooo.jogo.cartas.Faccao;
 import trabalhooo.jogo.cartas.Carta;
+import trabalhooo.jogo.Tabuleiro;
+import trabalhooo.jogo.cartas.Faccao;
 
 /**
  *
@@ -17,40 +20,30 @@ import trabalhooo.jogo.cartas.Carta;
  */
 public class TrabalhoOO {
     
+    
+    
     public static void main(String[] args) {
-        Jogo j = new Jogo("Zé", "Maria");
-        j.setFaccaoJogadorUm(Faccao.MONSTROS);
-        j.setFaccaoJogadorDois(Faccao.MONSTROS);
-        if(j.estaPronto()){
-            imprimeMao(j.getMaoJogadorUm(), j.getNomeJogadorUm());
-            imprimeMao(j.getMaoJogadorDois(), j.getNomeJogadorDois());
-        }
+       Jogador p1 = new Jogador("Jose");
+       Jogador p2 = new Jogador("Maria"); 
+
+       Jogo novoJogo = new Jogo (p1,p2);
+       
+       novoJogo.jogadorInicial();
+       
+       novoJogo.Jogo(novoJogo);
+       
+       System.out.println(novoJogo.jogadorInicial().getNome());
+       
+       novoJogo.setFaccaoJogadorUm(Faccao.MONSTROS);
+       novoJogo.setFaccaoJogadorDois(Faccao.NILFGAARD);
+       
+       System.out.println(p1.getNome());
+       
+       for(int i=0; i<p1.getMao().length;i++){
+           System.out.println("");
+           System.out.println("| "+p1.getMao()[i].getNome()+" |");
+       }
+       
     }
-    
-    public static void imprimeCampo(Carta[][] campo){
-        System.out.println("################################");
-        for(Carta[] fileira : campo){
-            System.out.println("---------------------------");
-            imprimeFileira(fileira);
-            System.out.println("---------------------------");
-        }
-        System.out.println("################################");
-    }
-    
-    public static void imprimeFileira(Carta[] fileira){
-        for(Carta carta : fileira){
-            System.out.print("| "+ carta.getNome() +" |");
-        }
-    }
-    
-    public static void imprimeMao(Carta[] cartas, String nomeJogador){
-        System.out.println("################################");
-        System.out.println("JOGADOR: " + nomeJogador);
-        for(Carta carta : cartas){
-            System.out.print("| "+ carta.getNome() +" |");
-        }
-        System.out.println();
-        System.out.println("################################");
-    }
-    
+
 }

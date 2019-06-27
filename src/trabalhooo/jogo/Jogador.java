@@ -62,7 +62,7 @@ public class Jogador {
      * @param faccao Facção escolhida
      * @throws Exception se já tiver pedido as cartas iniciais
      */
-    public void setBaralho(Faccao faccao) throws Exception{
+    public void setBaralho(Faccao faccao){
        //Inicia o baralho com a facção
        baralho = new Baralho(faccao);
        //Retira as 10 primeiras cartas e passa para mão
@@ -90,13 +90,13 @@ public class Jogador {
      * @return Array de Cartas com as cartas na mão do jogador
      * @throws Exception Se o jogador ainda não estiver pronto
      */
-    public Carta[] getMao() throws Exception{
+    public Carta[] getMao(){
         if(pronto){
             Carta[] retornoMao = new Carta[mao.size()];
             retornoMao = mao.toArray(retornoMao);
             return retornoMao;
         }
-        throw new Exception("Jogador ainda não está pronto!");    
+        return null;           
     }
     
     /**
@@ -130,5 +130,13 @@ public class Jogador {
     
     public Carta getLider(){
         return this.baralho.getLider();
+    }
+    
+    public boolean getPassou(){
+        return this.passou;
+    }
+    
+    public void setPassou(boolean b){
+        this.passou = b;
     }
 }

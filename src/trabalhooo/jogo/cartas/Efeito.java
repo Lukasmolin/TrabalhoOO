@@ -21,6 +21,11 @@ public class Efeito {
     private Tabuleiro tab;
     private Jogo j;
     
+    public Efeito (Tabuleiro tab, Jogo j){
+        this.tab = tab;
+        this.j = j;
+    }
+    
    /**
     * Implementa efeito da Classe CartaEloForte
     * @param carta carta a ser jogada

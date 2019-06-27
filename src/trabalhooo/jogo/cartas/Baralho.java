@@ -57,13 +57,14 @@ public final class Baralho {
      * @return Array de 10 cartas iniciais do jogo
      * @throws Exception se Já pediu as Cartas Iniciais
      */
-    public Carta[] getCartasIniciais() throws Exception{
-        if(comecou) { throw new Exception("Já pediu as cartas iniciais, reinicie o Baralho!"); }
+    public Carta[] getCartasIniciais(){
+        if(comecou) {
+           reiniciarBaralho(faccao); 
+        }
         
         comecou = true;
         Carta[] cartasIniciais = new Carta[10];
         cartasIniciais = baralho.subList(0, 10).toArray(cartasIniciais);
-        cartasIniciais = baralho.subList(0, 3).toArray(cartasIniciais);
         baralho.removeAll(baralho.subList(0, 10));
         return cartasIniciais;
     }
