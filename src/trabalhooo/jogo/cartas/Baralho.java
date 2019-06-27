@@ -164,12 +164,16 @@ public final class Baralho {
         Carta lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
         nilfgaard.add(new CartaSimples("Albrich",faccao,2,"Unit",2));
         nilfgaard.add(new CartaSimples("Assire var Anahid",faccao,2,"Unit",6));
-        nilfgaard.add(new CartaSimples("Black Infantry Archer",faccao,2,"Unit",10));
+        nilfgaard.add(new CartaSimples("Black Infantry Archer I",faccao,2,"Unit",10));
+        nilfgaard.add(new CartaSimples("Black Infantry Archer II",faccao,2,"Unit",10));
         nilfgaard.add(new CartaSimples("Cahir Mawr Dyffryn aep Ceallach",faccao,1,"Unit",6));
         nilfgaard.add(new CartaSimples("Cynthia",faccao,2,"Unit",4));
-        nilfgaard.add(new CartaMedico("Etolian Auxiliary Archers",faccao,2,"Unit",1));
+        nilfgaard.add(new CartaMedico("Etolian Auxiliary Archers I",faccao,2,"Unit",1));
+        nilfgaard.add(new CartaMedico("Etolian Auxiliary Archers II",faccao,2,"Unit",1));
         nilfgaard.add(new CartaSimples("Fringilla Vigo",faccao,2,"Unit",6));
         nilfgaard.add(new CartaSimples("Heavy Zerrikanian Fire Scorpion",faccao,3,"Unit",10));
+        nilfgaard.add(new CartaEloForte("Impera Brigade Guard",faccao,1,"Unit",3));
+        nilfgaard.add(new CartaEloForte("Impera Brigade Guard",faccao,1,"Unit",3));
         nilfgaard.add(new CartaEloForte("Impera Brigade Guard",faccao,1,"Unit",3));
         nilfgaard.add(new CartaEloForte("Impera Brigade Guard",faccao,1,"Unit",3));
         nilfgaard.add(new CartaHeroi("Letho of Gulet",faccao,1,"Hero",10));
@@ -190,7 +194,8 @@ public final class Baralho {
         nilfgaard.add(new CartaHeroi("Tibor Eggebracht",faccao,2,"Hero",10));
         nilfgaard.add(new CartaSimples("Vanhemar",faccao,2,"Unit",4));
         nilfgaard.add(new CartaEspiao("Vattier de Rideaux",faccao,1,"Unit",4));
-        nilfgaard.add(new CartaSimples("Young Emissary",faccao,1,"Unit",5));
+        nilfgaard.add(new CartaSimples("Young Emissary I",faccao,1,"Unit",5));
+        nilfgaard.add(new CartaSimples("Young Emissary II",faccao,1,"Unit",5));
         nilfgaard.add(new CartaSimples("Zerrikanian Fire Scorpion",faccao,3,"Unit",5));
         Collections.shuffle(nilfgaard); //Mistura a lista
         return nilfgaard;
@@ -212,7 +217,8 @@ public final class Baralho {
         reinosdonorte.add(new CartaEloForte("Poor Fucking Infantry",faccao,1,"Unit",1));
         reinosdonorte.add(new CartaEloForte("Poor Fucking Infantry",faccao,1,"Unit",1));
         reinosdonorte.add(new CartaEspiao("Prince Stennis",faccao,1,"Unit",5));
-        reinosdonorte.add(new CartaSimples("Redanian Foot Soldier",faccao,1,"Unit",1));
+        reinosdonorte.add(new CartaSimples("Redanian Foot Soldier I",faccao,1,"Unit",1));
+        reinosdonorte.add(new CartaSimples("Redanian Foot Soldier II",faccao,1,"Unit",1));
         reinosdonorte.add(new CartaSimples("Siegfried of Danesie",faccao,1,"Unit",5));
         reinosdonorte.add(new CartaEspiao("Sigismund Dijkstra",faccao,1,"Unit",4));
         reinosdonorte.add(new CartaHeroi("Vernon Roche",faccao,1,"Hero",10));
@@ -221,11 +227,13 @@ public final class Baralho {
         reinosdonorte.add(new CartaAumentoMoral("Kaedweni Siege Expert",faccao,3,"Unit",1));
         reinosdonorte.add(new CartaEloForte("Catapult",faccao,3,"Unit",8));
         reinosdonorte.add(new CartaEloForte("Catapult",faccao,3,"Unit",8));
-        reinosdonorte.add(new CartaSimples("Ballista",faccao,3,"Unit",6));
+        reinosdonorte.add(new CartaSimples("Ballista I",faccao,3,"Unit",6));
+        reinosdonorte.add(new CartaSimples("Ballista II",faccao,3,"Unit",6));
         reinosdonorte.add(new CartaMedico("Dun Banner Medic",faccao,3,"Unit",5));
         reinosdonorte.add(new CartaSimples("Siege Tower",faccao,3,"Unit",6));
         reinosdonorte.add(new CartaEspiao("Thaler",faccao,3,"Unit",1));
-        reinosdonorte.add(new CartaSimples("Trebuchet",faccao,3,"Unit",6));
+        reinosdonorte.add(new CartaSimples("Trebuchet I",faccao,3,"Unit",6));
+        reinosdonorte.add(new CartaSimples("Trebuchet II",faccao,3,"Unit",6));
         reinosdonorte.add(new CartaSimples("Keira Metz",faccao,2,"Unit",5));
         reinosdonorte.add(new CartaSimples("Dethmold",faccao,2,"Unit",6));
         reinosdonorte.add(new CartaEloForte("Crinfrid Reavers Dragon Hunter",faccao,2,"Unit",5));
@@ -261,7 +269,9 @@ public final class Baralho {
         ScoiaTael.add(new CartaAgil("Filavandrel aen Fidhail",faccao,2,"Unit",6));
         ScoiaTael.add(new CartaAgil("Ciaran aep Easnillien",faccao,2,"Unit",3));
         ScoiaTael.add(new CartaAgil("Barclay Els",faccao,2,"Unit",6));
-        ScoiaTael.add(new CartaAgil("Dol Blathanna Scout",faccao,2,"Unit",6));
+        ScoiaTael.add(new CartaAgil("Dol Blathanna Scout I",faccao,2,"Unit",6));
+        ScoiaTael.add(new CartaAgil("Dol Blathanna Scout II",faccao,2,"Unit",6));
+        ScoiaTael.add(new CartaAgil("Dol Blathanna Scout III",faccao,2,"Unit",6));
         ScoiaTael.add(new CartaAgil("Vrihedd Brigade Veteran",faccao,2,"Unit",6));
         ScoiaTael.add(new CartaAgil("Yaevinn",faccao,2,"Unit",5));
         ScoiaTael.add(new CartaQueima("Schirrú",faccao,3,"Unit",8));
@@ -273,7 +283,9 @@ public final class Baralho {
         ScoiaTael.add(new CartaHeroi("Eithné",faccao,2,"Hero",10));
         ScoiaTael.add(new CartaAumentoMoral("Milva",faccao,2,"Unit",10));
         ScoiaTael.add(new CartaHeroi("Iorveth",faccao,2,"Hero",10));
-        ScoiaTael.add(new CartaMedico("Havekar Healer",faccao,2,"Unit",1));
+        ScoiaTael.add(new CartaMedico("Havekar Healer I",faccao,2,"Unit",1));
+        ScoiaTael.add(new CartaMedico("Havekar Healer II",faccao,2,"Unit",1));
+        ScoiaTael.add(new CartaMedico("Havekar Healer III",faccao,2,"Unit",1));
         ScoiaTael.add(new CartaSimples("Ida Emean aep Sivney",faccao,2,"Unit",6));
         ScoiaTael.add(new CartaHeroi("Saesenthessis",faccao,2,"Hero",10));
         ScoiaTael.add(new CartaSimples("Riordain",faccao,2,"Unit",1));
@@ -307,7 +319,7 @@ public final class Baralho {
         neutro.add(new CartaEspiao("Mysterious Elf",faccao,1,"Unit",1));
         neutro.add(new CartaHeroi("Triss Merigold",faccao,1,"Hero",10));
         neutro.add(new CartaQueima("Villentretenmerth",faccao,1,"Unit",7));
-        neutro.add(new CartaHeroi("Vesemir",faccao,1,"Hero",15));
+        neutro.add(new CartaSimples("Vesemir",faccao,1,"Unit",15));
         neutro.add(new CartaSimples("Bovine Defense Force",faccao,1,"Unit",8));
         neutro.add(new CartaAumentoMoral("Dandelion",faccao,1,"Unit",2));
         neutro.add(new CartaSimples("Zoltan Chivay",faccao,1,"Unit",5));
