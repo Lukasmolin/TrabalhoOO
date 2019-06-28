@@ -11,7 +11,7 @@ import trabalhooo.gui.elementos.*;
  * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
  */
 public class Gui extends JFrame implements Runnable{
-    private static Dimension TAMANHO = new Dimension(640, 480);
+    private static Dimension TAMANHO = new Dimension(1280, 720);
 
     //JPanel principal que contém todos os outros
     private JPanel janela;
@@ -58,7 +58,7 @@ public class Gui extends JFrame implements Runnable{
      * @param tamanho dimensão do frame
      */
     public static void setDimensao(Dimension tamanho){
-        TAMANHO = tamanho;
+        TAMANHO = new Dimension(tamanho);
     }
 
     /**
