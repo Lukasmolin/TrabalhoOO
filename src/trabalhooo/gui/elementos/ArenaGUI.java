@@ -1,12 +1,19 @@
 package trabalhooo.gui.elementos;
 
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+
+import com.sun.xml.internal.ws.api.Component;
 
 /**
  * Classe representa a arena do jogo, contém as fileiras, cemiterios e
@@ -16,59 +23,79 @@ public class ArenaGUI extends JPanel {
     private CampoGUI[] campos = new CampoGUI[2];
     private List<CartaGUI> climas = new ArrayList<>();
     private JLabel climas_rotulo = new JLabel("Climas:");
-    private JPanel climas_panel;
-    private JPanel campos_painel;
+    private JPanel climas_panel = new JPanel();
+    private JPanel campos_painel = new JPanel();
 
     public ArenaGUI() {
         inicializaArena();
+        setBorder(BorderFactory.createLineBorder(Color.BLUE));
     }
 
     private void inicializaArena() {
-        setLayout(new GridLayout(1, 2));
+        setLayout(new FlowLayout());
         inicializaCampos();
         inicializaClimas();
         
-        add(climas_panel);
         add(campos_painel);
+        add(climas_panel);
     }
 
     private void inicializaCampos(){
         campos[0] = new CampoGUI();
         campos[1] = new CampoGUI();
-        campos_painel = new JPanel();
+        campos_painel.setLayout(new BoxLayout(campos_painel, BoxLayout.Y_AXIS));
+        
         campos_painel.add(campos[0]);
         campos_painel.add(campos[1]);
     }
 
     private void inicializaClimas(){
-        climas_panel = new JPanel();
+        climas_panel.setLayout(new GridLayout(0, 1));
         climas_panel.add(climas_rotulo);
+        climas_panel.add(new CartaGUI());
     }
 
     /**
-     * Retorna o campo do Jogador Um
-     * @return Campo um
+     * Seta as cartaGUI no campo um
+     * @param campo Matriz do campo a ser setado
      */
-    public CampoGUI getCampoUm(){
-        return campos[0];
+    public void setCampoUm(CartaGUI[][] campo) throws Exception{
+        campos[0].setCampo(campo);
     }
 
     /**
-     * Retorna o campo do Jogador Dois
-     * @return Campo dois
+     * Seta as cartaGUI no campo dois
+     * @param campo Matriz do campo a ser setado
      */
-    public CampoGUI getCampoDois(){
-        return campos[1];
+    public void setCampoDois(CartaGUI[][] campo) throws Exception{
+        campos[1].setCampo(campo);
     }
 
+
+
     /**
-     * Seta os climas do tabuleiro
+     * Seta os climas do tabuleiro, um array de tamanho zero limpa o clima
      * @param climas cartas de clima
      */
-    public void setClimas(CartaGUI[] climas){
-        for(int i = 0; i < climas.length; i++){
-            if(!this.climas.contains(climas[i]));
-                adicionaClima(climas[i]);
+    public void setClimas(CartaGUI[] climas) throws Exception{
+        if(climas == null) { throw new Exception("climas NULL"); }
+        
+        if(climas.length == 0){
+            limpaClimas();
+        } else {
+            //Remove Carta Vazia do JPanel
+            if(this.climas.isEmpty()){
+                climas_panel.removeAll();
+                climas_panel.add(climas_rotulo);
+            }
+            
+            //Adiciona cartas          
+            for(int i = 0; i < climas.length; i++){
+                if(climas[i] == null) { throw new Exception("CartaClima Null! Indice: " +i); }
+                if(!this.climas.contains(climas[i])){
+                    adicionaClima(climas[i]);
+                }
+            }
         }
     }
 
@@ -84,6 +111,7 @@ public class ArenaGUI extends JPanel {
         climas.clear();
         climas_panel.removeAll();
         climas_panel.add(climas_rotulo);
+        climas_panel.add(new CartaGUI());
     }
 
 }

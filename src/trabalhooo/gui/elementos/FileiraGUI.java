@@ -1,7 +1,5 @@
 package trabalhooo.gui.elementos;
-
 import java.awt.FlowLayout;
-
 import javax.swing.JPanel;
 
 /**
@@ -13,17 +11,29 @@ public class FileiraGUI extends JPanel {
 
     public FileiraGUI() {
         setLayout(new FlowLayout());
+        add(new CartaGUI());
     }
 
     /**
      * Atualiza as carats na fileira
      * @param cartas cartas na fileira
+     * @throws Exception se cartas for null ou se algum indice de cartas for null
      */
-    public void setFileira(CartaGUI[] cartas) {
+    public void setFileira(CartaGUI[] cartas) throws Exception{
+        if (cartas == null) { throw new Exception("Array de CartaGUI Null!"); }
+
         removeAll();
-        for(CartaGUI carta : cartas){
-            add(carta);
+        if(cartas.length == 0){
+            add(new CartaGUI());
+        } else {
+            for(CartaGUI carta : cartas){
+                if(carta == null) {
+                    removeAll();
+                    add(new CartaGUI());
+                    throw new Exception("CartaGUI Null!");
+                }
+                add(carta);
+            }
         }
     }
-    
 }
