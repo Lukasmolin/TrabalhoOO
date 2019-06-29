@@ -70,7 +70,25 @@ public class ArenaGUI extends JPanel {
         campos[1].setCampo(campo);
     }
 
+    /**
+     * Seta a pontuação de cada uma das fileiras do jogador
+     * @param pontos Array contendo a pontuação para cada uma das fileiras
+     * @throws Exception se o array ou algum de seus elementos for null
+     * @throws Exception se o tamanho do array for inferior a quantidade de fileiras de um jogador
+     */
+    public void setPontosCampoUm(String[] pontos) throws Exception{
+        campos[0].setPontosFileira(pontos);
+    }
 
+    /**
+     * Seta a pontuação de cada uma das fileiras do jogador
+     * @param pontos Array contendo a pontuação para cada uma das fileiras
+     * @throws Exception se o array ou algum de seus elementos for null
+     * @throws Exception se o tamanho do array for inferior a quantidade de fileiras de um jogador
+     */
+    public void setPontosCampoDois(String[] pontos) throws Exception{
+        campos[1].setPontosFileira(pontos);
+    }
 
     /**
      * Seta os climas do tabuleiro, um array de tamanho zero limpa o clima
@@ -112,5 +130,7 @@ public class ArenaGUI extends JPanel {
         climas_panel.add(climas_rotulo);
         climas_panel.add(new CartaGUI());
     }
+
+
 
 }

@@ -19,6 +19,7 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
     //Elementos mutaveis
     private JLabel vidas_info = new JLabel();
     private JLabel cartasRestantes_info = new JLabel();
+    private JLabel pontuacao_info = new JLabel();
 
     //Elementos fixos de cada instancia
     private JLabel nome_info = new JLabel();
@@ -50,7 +51,13 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
         mao.setListener(this);
         nome_info.setText(nome);
         baralho_info.setText(baralho);
+        pontuacao_info.setText("0");
         vidas_info = new JLabel(vidas);
+        adicionaElementos();
+    }
+
+    private void adicionaElementos(){
+        add(pontuacao_info);
         add(nome_rotulo);
         add(nome_info);
         add(vidas_rotulo);
@@ -60,13 +67,21 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
         add(cartasRestantes_rotulo);
         add(cartasRestantes_info);
     }
+
+    /**
+     * Seta a pontuação do jogador
+     * @param pontuacao Pontos do jogador
+     */
+    public void setPontuacao(String pontuacao){
+        pontuacao_info.setText(pontuacao);
+    }
     
     /**
      * Seta o valor do campo vida
      * @param vidas quantidade de vidas atual
      */
     public void setVidas(String vidas) {
-        this.vidas_info.setText(vidas);
+        vidas_info.setText(vidas);
     }
 
     /**
@@ -84,7 +99,8 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
     }
 
     private void atualizaCartas(){
-        this.cartasRestantes_info.setText(Integer.toString(mao.quantidade()));
+        String cartasNaMao = Integer.toString(mao.quantidade());
+        this.cartasRestantes_info.setText(cartasNaMao);
     }
 
     /**

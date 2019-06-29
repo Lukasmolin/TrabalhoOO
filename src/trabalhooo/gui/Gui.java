@@ -19,7 +19,6 @@ public class Gui extends JFrame{
 
     //JPanel principal que contém todos os outros
     private JPanel janela;
-    private GuiListener control;
     private JogadorGUI[] jogadores = new JogadorGUI[2];
     public ArenaGUI arena;
     
@@ -27,8 +26,8 @@ public class Gui extends JFrame{
      * @deprecated Contrutor de testes sem parametros com valores padrão
      */
     public Gui(){
-        largura = 640;
-        altura = 480;
+        largura = 800;
+        altura = 600;
         inicializaFrame("Gwent");
         inicializaElementos("nomeJogadorUm", "nomeJogadorDois");
     }
@@ -163,6 +162,46 @@ public class Gui extends JFrame{
     public void setGuiListener(GuiListener controller){
         jogadores[0].SetGuiListener(controller);
         jogadores[1].SetGuiListener(controller);
+    }
+
+    /**
+     * Seta os pontos do jogador
+     * @param pontos pontos do jogador no momento
+     * @throws Exception se pontos for null
+     */
+    public void setPontosJogadorUm(String pontos) throws Exception{
+        if(pontos == null) { throw new Exception("Pontos Null!"); }
+        jogadores[0].setPontuacao(pontos);
+    }
+
+    /**
+     * Seta os pontos do jogador
+     * @param pontos pontos do jogador no momento
+     * @throws Exception se pontos for null
+     */
+    public void setPontosJogadorDois(String pontos) throws Exception{
+        if(pontos == null) { throw new Exception("Pontos Null!"); }
+        jogadores[1].setPontuacao(pontos);
+    }
+
+    /**
+     * Seta a pontuação de cada uma das fileiras do campo
+     * @param pontos Array contendo a pontuação para cada uma das fileiras
+     * @throws Exception se o array ou algum de seus elementos for null
+     * @throws Exception se o tamanho do array for inferior a quantidade de fileiras de um jogador
+     */
+    public void setPontosCampoUm(String[] pontos) throws Exception{
+        arena.setPontosCampoUm(pontos);
+    }
+
+    /**
+     * Seta a pontuação de cada uma das fileiras do campo
+     * @param pontos Array contendo a pontuação para cada uma das fileiras
+     * @throws Exception se o array ou algum de seus elementos for null
+     * @throws Exception se o tamanho do array for inferior a quantidade de fileiras de um jogador
+     */
+    public void setPontosCampoDois(String[] pontos) throws Exception{
+        arena.setPontosCampoDois(pontos);
     }
 
     /**
