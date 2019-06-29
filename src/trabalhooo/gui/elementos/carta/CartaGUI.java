@@ -1,4 +1,4 @@
-package trabalhooo.gui.elementos;
+package trabalhooo.gui.elementos.carta;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,15 +16,16 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 
-public class CartaGUI extends JPanel {
+public class CartaGUI extends JPanel{
     //Id da Interface serializable
     private static final long serialVersionUID = -5901332414101123794L;
 
+    private String nome = "";
     private Dimension tamanho_carta;
     private static int altura = 0;
 
-    //Tamanho da carta = altura da resolução da Gui / max cartas na vertical
-    private static final int MAX_CARTAS_VERTICAL = 8;
+    //Altura da carta = altura da resolução da Gui * MULTIPLICADOR_TAM
+    private static final double MULTIPLICADOR_TAM = 0.12;
     
     //Paineis principais
     private JPanel textos_panel = new JPanel();
@@ -84,6 +85,7 @@ public class CartaGUI extends JPanel {
         if(!descricao.equals("")){
             setToolTipText(descricao);
         }
+        this.nome = nome;
         nome_info.setText(nome);
         pontuacao_info.setText(pontuacao);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -95,8 +97,9 @@ public class CartaGUI extends JPanel {
     }
 
     private void inicializaTamanhos(){
-        if(altura == 0)
-            altura = (int)Gui.getDimensao().getHeight()/MAX_CARTAS_VERTICAL;
+        if(altura == 0){
+            altura = (int)(Gui.getDimensao().getHeight() * MULTIPLICADOR_TAM);//CONCERTAR
+        }
 
         int largura = altura / 5 * 4;
         tamanho_carta = new Dimension(largura, (int)altura);
@@ -156,6 +159,14 @@ public class CartaGUI extends JPanel {
 
         Image img = RepositorioGUI.getImagem(nome);
         return new ImageIcon(img);
+    }
+
+    /**
+     * Retorna o nome da carta ou uma String vazia se a carta for vazia
+     * @return Nome da carta
+     */
+    public String getNome(){
+        return nome;
     }
 
 }

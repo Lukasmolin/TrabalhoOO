@@ -1,7 +1,9 @@
-package trabalhooo.gui.elementos;
+package trabalhooo.gui.elementos.arena;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
+import trabalhooo.gui.elementos.carta.CartaGUI;
 
 /**
  * Classe que agrupa as fileiras de um jogador no tabuelrio

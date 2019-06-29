@@ -1,7 +1,6 @@
-package trabalhooo.gui.elementos;
+package trabalhooo.gui.elementos.arena;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -11,9 +10,9 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
+import javax.swing.border.BevelBorder;
 
-import com.sun.xml.internal.ws.api.Component;
+import trabalhooo.gui.elementos.carta.CartaGUI;
 
 /**
  * Classe representa a arena do jogo, contém as fileiras, cemiterios e
@@ -28,7 +27,7 @@ public class ArenaGUI extends JPanel {
 
     public ArenaGUI() {
         inicializaArena();
-        setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     }
 
     private void inicializaArena() {

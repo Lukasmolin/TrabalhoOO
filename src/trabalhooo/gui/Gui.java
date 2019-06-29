@@ -6,24 +6,27 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import trabalhooo.gui.elementos.*;
+import trabalhooo.gui.elementos.arena.ArenaGUI;
+import trabalhooo.gui.elementos.carta.CartaGUI;
+import trabalhooo.gui.elementos.jogador.JogadorGUI;
 
 /**
  * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
  */
 public class Gui extends JFrame{
-    private static Dimension TAMANHO = new Dimension(1280, 720);
+    private static Dimension TAMANHO = new Dimension(1280, 720); //Consertar
 
     //JPanel principal que contém todos os outros
     private JPanel janela;
     private GuiListener control;
     private JogadorGUI[] jogadores = new JogadorGUI[2];
-    private ArenaGUI arena = new ArenaGUI();
+    public ArenaGUI arena;
     
     /**
      * @deprecated Contrutor de testes sem parametros com valores padrão
      */
     public Gui(){
+        TAMANHO = new Dimension(640, 480);
         inicializaFrame("Gwent");
         inicializaElementos("nomeJogadorUm", "nomeJogadorDois");
     }
@@ -37,8 +40,8 @@ public class Gui extends JFrame{
      * @param altura altura da janela
      */
     public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, int largura, int altura){
+        TAMANHO = new Dimension(largura, altura);
         inicializaFrame(titulo);
-        setDimensao(new Dimension(largura, altura));
         inicializaElementos(nomeJogadorUm, nomeJogadorDois);
     }
 
@@ -50,17 +53,9 @@ public class Gui extends JFrame{
      * @param tamanho Dimensão da janela
      */
     public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, Dimension tamanho){
-        inicializaFrame(titulo);
-        setDimensao(new Dimension(tamanho));
-        inicializaElementos(nomeJogadorUm, nomeJogadorDois);
-    }
-
-    /**
-     * Seta o tamanho do frame
-     * @param tamanho dimensão do frame
-     */
-    private static void setDimensao(Dimension tamanho){
         TAMANHO = new Dimension(tamanho);
+        inicializaFrame(titulo);
+        inicializaElementos(nomeJogadorUm, nomeJogadorDois);
     }
 
     /**
@@ -68,9 +63,8 @@ public class Gui extends JFrame{
      * @return Dimensão do frame
      */
     public static Dimension getDimensao(){
-        return new Dimension(TAMANHO);
+        return TAMANHO; //Consertar
     }
-    
     /**
      * Inicializa o JFrame e o Jpanel principal
      * @param titulo titulo do JFrame
@@ -95,19 +89,19 @@ public class Gui extends JFrame{
     private void inicializaElementos(String nomeJogadorUm, String nomeJogadorDois){
         jogadores[0] = new JogadorGUI(nomeJogadorUm, "BaralhoUm", "3");
         jogadores[1] = new JogadorGUI(nomeJogadorDois, "BaralhoDois", "3");
+        arena = new ArenaGUI();
         janela.add(jogadores[0]);
         janela.add(arena);
         janela.add(jogadores[1]);
     }
-
     /**
-     * Retorna o Jogador um da Gui
-     * @return
+     * seta o valor da vida do jogador
+     * @param vida Vida atual
      */
-    public JogadorGUI getJogadorUm(){
-        return jogadores[0];
+    public void setVidaJogadorUm(String vida){
+        jogadores[0].setVidas(vida);
     }
-
+    
     /**
      * seta o valor da vida do jogador
      * @param vida Vida atual
@@ -117,11 +111,64 @@ public class Gui extends JFrame{
     }
 
     /**
+     * Jogador faz a jogada
+     */
+    public void jogaUm(){
+        jogadores[0].mostraMao();
+    }
+
+    /**
+     * Jogador faz a jogada
+     */
+    public void jogaDois(){
+        jogadores[1].mostraMao();
+    }
+
+    /**
+     * Seta a mão do Jogador
+     * @param mao Array de cartas na mão do Jogador
+     * @throws Exception se o array ou algum elemento nele contido for null
+     */
+    public void setMaoUm(CartaInfo[] mao) throws Exception{
+        if(mao == null) { throw new Exception("Mao null!"); }
+        CartaGUI[] novaMao = converteCartas(mao);
+        jogadores[0].setMao(novaMao);
+    }
+
+    
+    /**
+     * Seta a mão do Jogador
+     * @param mao Array de cartas na mão do Jogador
+     * @throws Exception se o array ou algum elemento nele contido for null
+     */
+    public void setMaoDois(CartaInfo[] mao) throws Exception{
+        if(mao == null) { throw new Exception("Mao null!"); }
+        CartaGUI[] novaMao = converteCartas(mao);
+        jogadores[1].setMao(novaMao);
+    }
+
+    /**
+     * Converte um array de CartaInfo e retorna um novo array de CartaGUI
+     * @param cartas Array de CartaInfo
+     * @return Array de CartaGUI
+     * @throws Exception se algum elemento no Array for null
+     */
+    private static CartaGUI[] converteCartas(CartaInfo[] cartas) throws Exception{
+        CartaGUI[] novasCartas = new CartaGUI[cartas.length];
+        for(int i = 0; i < novasCartas.length; i++){
+            if(cartas == null) { throw new Exception("CartaInfo Null!"); }
+            novasCartas[i] = new CartaGUI(cartas[i]);
+        }
+        return novasCartas;
+    }
+
+    /**
      * Seta o controller pra esta Gui
      * @param controller Listener pra esta Gui
      */
     public void setGuiListener(GuiListener controller){
-        this.control = controller;
+        jogadores[0].SetGuiListener(controller);
+        jogadores[1].SetGuiListener(controller);
     }
 
     /**
@@ -144,7 +191,13 @@ public class Gui extends JFrame{
         arena.setCampoDois(novoCampo);
     }
 
-    private CartaGUI[][] converteCampo(CartaInfo[][] campo) throws Exception{
+    /**
+     * converteU
+     * @param campo
+     * @return
+     * @throws Exception
+     */
+    private static CartaGUI[][] converteCampo(CartaInfo[][] campo) throws Exception{
         if(campo == null) { throw new Exception("Campo de CartaInfo null"); }
         CartaGUI[][] novo = new CartaGUI[campo.length][];
         for(int i = 0; i < novo.length; i++){

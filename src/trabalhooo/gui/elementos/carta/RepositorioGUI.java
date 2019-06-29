@@ -1,4 +1,4 @@
-package trabalhooo.gui.elementos;
+package trabalhooo.gui.elementos.carta;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class RepositorioGUI {
+    private static boolean estaPronto = false;
     private static Path pasta;
     private static Dimension tamanho;
     private RepositorioGUI(){};
@@ -77,6 +78,14 @@ public class RepositorioGUI {
      */
     public static Dimension getTamanho(){
         return (tamanho == null ? null : new Dimension(tamanho));
+    }
+
+    /**
+     * Retorna se o repositorio está pronto para enviar as imagens
+     * @return True se estiver pronto, false senão
+     */
+    public static boolean estaPronto(){
+        return estaPronto;
     }
 
 

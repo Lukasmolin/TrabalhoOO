@@ -1,6 +1,9 @@
-package trabalhooo.gui.elementos;
+package trabalhooo.gui.elementos.arena;
+
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
+
+import trabalhooo.gui.elementos.carta.CartaGUI;
 
 /**
  * Classe que representa uma fileira no tabuleiro de um jogador
