@@ -16,6 +16,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 
+/**
+ * Classe que representa uma carta gráfica
+ */
 public class CartaGUI extends JPanel{
     //Id da Interface serializable
     private static final long serialVersionUID = -5901332414101123794L;
@@ -153,7 +156,7 @@ public class CartaGUI extends JPanel{
     private ImageIcon getImagem(String nome) throws Exception{
         if(tamanho_img == null) { throw new Exception("O tamanho da imagem não foi setado"); }
         
-        if(RepositorioGUI.getTamanho() == null){
+        if(!RepositorioGUI.tamanhoInicializado()){
             RepositorioGUI.setTamanho(tamanho_img);
         }
 

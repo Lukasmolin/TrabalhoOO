@@ -94,5 +94,6 @@ public class CampoGUI extends JPanel {
                 fileiras[i].setFileira(campo[i]);
             }
         }
+        this.setVisible(true);
     }
 }

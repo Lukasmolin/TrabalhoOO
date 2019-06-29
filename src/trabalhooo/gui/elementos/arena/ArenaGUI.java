@@ -100,25 +100,16 @@ public class ArenaGUI extends JPanel {
         if(climas.length == 0){
             limpaClimas();
         } else {
-            //Remove Carta Vazia do JPanel
-            if(this.climas.isEmpty()){
-                climas_panel.removeAll();
-                climas_panel.add(climas_rotulo);
-            }
+            climas_panel.removeAll();
+            climas_panel.add(climas_rotulo);
             
             //Adiciona cartas          
             for(int i = 0; i < climas.length; i++){
                 if(climas[i] == null) { throw new Exception("CartaClima Null! Indice: " +i); }
-                if(!this.climas.contains(climas[i])){
-                    adicionaClima(climas[i]);
-                }
+                
+                climas_panel.add(climas[i]);
             }
         }
-    }
-
-    private void adicionaClima(CartaGUI clima){
-        climas.add(clima);
-        climas_panel.add(clima);
     }
 
     /**

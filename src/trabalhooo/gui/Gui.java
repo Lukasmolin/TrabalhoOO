@@ -20,7 +20,7 @@ public class Gui extends JFrame{
     //JPanel principal que contém todos os outros
     private JPanel janela;
     private JogadorGUI[] jogadores = new JogadorGUI[2];
-    public ArenaGUI arena;
+    private ArenaGUI arena;
     
     /**
      * @deprecated Contrutor de testes sem parametros com valores padrão
@@ -212,6 +212,7 @@ public class Gui extends JFrame{
     public void setCampoUm(CartaInfo[][] campo) throws Exception{
         CartaGUI[][] novoCampo = converteCampo(campo);
         arena.setCampoUm(novoCampo);
+        validate();
     }
 
     /**
@@ -222,6 +223,7 @@ public class Gui extends JFrame{
     public void setCampoDois(CartaInfo[][] campo) throws Exception{
         CartaGUI[][] novoCampo = converteCampo(campo);
         arena.setCampoDois(novoCampo);
+        validate();
     }
 
     /**
@@ -234,9 +236,10 @@ public class Gui extends JFrame{
         if(campo == null) { throw new Exception("Campo de CartaInfo null"); }
         CartaGUI[][] novo = new CartaGUI[campo.length][];
         for(int i = 0; i < novo.length; i++){
+            if(campo[i] == null) { throw new Exception("Fileira "+ i +" do campo é null"); }
             novo[i] = new CartaGUI[campo[i].length];
             for(int j = 0; j < novo[i].length; j++){
-                if(campo[i][j] == null) { throw new Exception ("CartaInfo Null"); }
+                if(campo[i][j] == null) { throw new Exception ("CartaInfo null\nFileira: "+i+"| indice: "+j); }
                 novo[i][j] = new CartaGUI(campo[i][j]);
             }
         }
@@ -251,6 +254,7 @@ public class Gui extends JFrame{
     public void setClima(CartaInfo[] clima) throws Exception{
         CartaGUI[] novoClima = converteClima(clima);
         arena.setClimas(novoClima);
+        validate();
     }
 
     public CartaGUI[] converteClima(CartaInfo[] clima) throws Exception{
@@ -268,6 +272,7 @@ public class Gui extends JFrame{
      */
     public void limpaClima(){
         arena.limpaClimas();
+        validate();
     }
 
 }

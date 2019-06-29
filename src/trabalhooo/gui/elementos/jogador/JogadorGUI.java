@@ -1,15 +1,14 @@
 package trabalhooo.gui.elementos.jogador;
 
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.SoftBevelBorder;
 
 import trabalhooo.gui.GuiListener;
 import trabalhooo.gui.elementos.carta.CartaGUI;
 
+/**
+ * Representa o painel de informações de um jogador
+ */
 public class JogadorGUI extends JPanel implements MaoGUIListener {
     
     private final String nome;

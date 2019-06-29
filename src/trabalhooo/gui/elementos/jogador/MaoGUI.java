@@ -55,6 +55,8 @@ public class MaoGUI extends JFrame implements MouseListener {
             limpa();
         else
             preencheMao(mao);
+
+        validate();
     }
 
     /**
@@ -104,7 +106,7 @@ public class MaoGUI extends JFrame implements MouseListener {
     //Eventos MouseListener
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.setVisible(false);
+        //this.setVisible(false);
         if(jogador != null && e.getSource() instanceof CartaGUI){
             CartaGUI fonte = (CartaGUI)e.getSource();
             jogador.jogadaFeita(fonte.getNome());
