@@ -15,16 +15,15 @@ import trabalhooo.gui.Gui;
 import trabalhooo.gui.elementos.carta.CartaGUI;
 
 public class MaoGUI extends JFrame implements MouseListener {
-    private static final int PROPORCAO_ALTURA = 6;
-    private static Dimension TAMANHO_MIN;
+    private static final double PROPORCAO_ALTURA = 0.20;
+    private Dimension tamanho;
     private MaoGUIListener jogador;
     private List<CartaGUI> mao = new ArrayList<>();
     private JPanel painelExterno = new JPanel(new BorderLayout());
     private JPanel painel = new JPanel();
 
     public MaoGUI() {
-        if(TAMANHO_MIN == null)
-            inicializaTamanho();
+        inicializaTamanho();
 
         painelExterno.add(painel, BorderLayout.CENTER);
         painel.setLayout(new FlowLayout());
@@ -33,10 +32,12 @@ public class MaoGUI extends JFrame implements MouseListener {
     }
 
     private void inicializaTamanho(){
-        //Consertar
-        int altura = (int)(Gui.getDimensao().getHeight());
-        int largura = (int)(Gui.getDimensao().getWidth());
-        TAMANHO_MIN = new Dimension(largura, altura);
+        Dimension dimensaoGui = Gui.getDimensao();
+        int altura = (int)(dimensaoGui.getHeight()*PROPORCAO_ALTURA); 
+        int largura = (int)(dimensaoGui.getWidth());
+        tamanho = new Dimension(largura, altura);
+        setMinimumSize(tamanho);
+        setMaximumSize(tamanho);
     }
 
     /**

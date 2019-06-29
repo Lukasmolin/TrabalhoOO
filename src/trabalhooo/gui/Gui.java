@@ -14,7 +14,8 @@ import trabalhooo.gui.elementos.jogador.JogadorGUI;
  * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
  */
 public class Gui extends JFrame{
-    private static Dimension TAMANHO = new Dimension(1280, 720); //Consertar
+    private static int altura = 0;
+    private static int largura = 0;
 
     //JPanel principal que contém todos os outros
     private JPanel janela;
@@ -26,7 +27,8 @@ public class Gui extends JFrame{
      * @deprecated Contrutor de testes sem parametros com valores padrão
      */
     public Gui(){
-        TAMANHO = new Dimension(640, 480);
+        largura = 640;
+        altura = 480;
         inicializaFrame("Gwent");
         inicializaElementos("nomeJogadorUm", "nomeJogadorDois");
     }
@@ -40,20 +42,8 @@ public class Gui extends JFrame{
      * @param altura altura da janela
      */
     public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, int largura, int altura){
-        TAMANHO = new Dimension(largura, altura);
-        inicializaFrame(titulo);
-        inicializaElementos(nomeJogadorUm, nomeJogadorDois);
-    }
-
-    /**
-     * Construtor com parametros
-     * @param titulo titulo da janela
-     * @param nomeJogadorUm nome do jogador um
-     * @param nomeJogadorDois nome do jogador dois
-     * @param tamanho Dimensão da janela
-     */
-    public Gui(String titulo, String nomeJogadorUm, String nomeJogadorDois, Dimension tamanho){
-        TAMANHO = new Dimension(tamanho);
+        Gui.altura = altura;
+        Gui.largura = largura;
         inicializaFrame(titulo);
         inicializaElementos(nomeJogadorUm, nomeJogadorDois);
     }
@@ -63,8 +53,13 @@ public class Gui extends JFrame{
      * @return Dimensão do frame
      */
     public static Dimension getDimensao(){
-        return TAMANHO; //Consertar
+        if(altura == 0 || largura == 0){
+            return null;
+        } else {
+            return new Dimension(largura, altura);
+        }
     }
+
     /**
      * Inicializa o JFrame e o Jpanel principal
      * @param titulo titulo do JFrame
@@ -73,11 +68,10 @@ public class Gui extends JFrame{
      */
     private void inicializaFrame(String titulo){
         setTitle(titulo);
-        setSize(TAMANHO);
+        setSize(largura, altura);
         janela = new JPanel();
         janela.setLayout(new BoxLayout(janela, BoxLayout.Y_AXIS));
         getContentPane().add(janela);
-        TAMANHO = janela.getSize();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

@@ -98,7 +98,7 @@ public class CartaGUI extends JPanel{
 
     private void inicializaTamanhos(){
         if(altura == 0){
-            altura = (int)(Gui.getDimensao().getHeight() * MULTIPLICADOR_TAM);//CONCERTAR
+            altura = (int)(Gui.getDimensao().getHeight() * MULTIPLICADOR_TAM);
         }
 
         int largura = altura / 5 * 4;
