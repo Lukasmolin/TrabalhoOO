@@ -52,7 +52,7 @@ public class CartaGUI extends JPanel{
      * recuperar a imagem da carta
      */
     public CartaGUI(CartaInfo carta) throws Exception{
-        if (carta == null) { throw new Exception("CartaInfo null"); }
+        if (carta == null) { throw new NullPointerException("CartaInfo null"); }
         valida(carta.getNome(), carta.getDescricao(), carta.getPontuacao());
         inicializa(carta.getNome(), carta.getDescricao(), carta.getPontuacao());
     }
@@ -78,9 +78,9 @@ public class CartaGUI extends JPanel{
     }
 
     private void valida(String nome, String descricao, String pontuacao) throws Exception{
-        if(nome == null) { throw new Exception ("Nome Null"); }
-        if(descricao == null) { throw new Exception ("Descricao Null! Carta: " +nome); }
-        if(pontuacao == null) { throw new Exception("Pontuacao Null! Carta: " +nome); }
+        if(nome == null) { throw new NullPointerException ("Nome Null"); }
+        if(descricao == null) { throw new NullPointerException ("Descricao Null! Carta: " +nome); }
+        if(pontuacao == null) { throw new NullPointerException ("Pontuacao Null! Carta: " +nome); }
     }
 
     //Inicializa os elementos Swing e adicionam ao JPanel carta
@@ -152,9 +152,10 @@ public class CartaGUI extends JPanel{
      * @param nome Nome da carta
      * @return Imagem da carta
      * @throws Exception Se a imagem não puder ser resgatada
+     * @throws Exception Se o tamanho da imagem não estiver setado
      */
     private ImageIcon getImagem(String nome) throws Exception{
-        if(tamanho_img == null) { throw new Exception("O tamanho da imagem não foi setado"); }
+        if(tamanho_img == null) { throw new NullPointerException("O tamanho da imagem não foi setado"); }
         
         if(!RepositorioGUI.tamanhoInicializado()){
             RepositorioGUI.setTamanho(tamanho_img);

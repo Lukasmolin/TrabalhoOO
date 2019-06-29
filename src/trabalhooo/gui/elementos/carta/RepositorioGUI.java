@@ -6,6 +6,8 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -13,6 +15,7 @@ public class RepositorioGUI {
     private static boolean estaPronto = false;
     private static Path pasta;
     private static Dimension tamanho;
+    private static Map<String, Image> cache = new HashMap<>(30);
     private RepositorioGUI(){};
 
     //Temp
@@ -24,7 +27,7 @@ public class RepositorioGUI {
      * @throws Exception Se o caminho não existir ou for nulo
      */
     public static void setCaminho(String caminho) throws Exception{
-        if(caminho == null) { throw new Exception("O caminho é null!"); }
+        if(caminho == null) { throw new NullPointerException("O caminho é null!"); }
         Path p = FileSystems.getDefault().getPath(caminho);
         System.out.println(p.toString()); //Temp
         if (!Files.exists(p)) { throw new Exception("Caminho da pasta de imagens não encontrado!"); }

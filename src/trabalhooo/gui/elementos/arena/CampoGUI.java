@@ -63,8 +63,11 @@ public class CampoGUI extends JPanel {
      * @throws Exception se o tamanho do array for inferior a quantidade de fileiras de um jogador
      */
     public void setPontosFileira(String[] pontos) throws Exception{
-        if(pontos == null) { throw new Exception("Array de pontos é null!"); }
-        if(pontos.length < QUANTIDADE) { throw new Exception("Array de pontos menor que quantidade de fileiras!"); }
+        if(pontos == null) { throw new NullPointerException("Array de pontos é null!"); }
+        if(pontos.length < QUANTIDADE) {
+            throw new ArrayIndexOutOfBoundsException("Array de pontos menor que quantidade de fileiras!");
+        }
+
         boolean elementoNull = false;
         for(int i = 0; i < QUANTIDADE; i++){
             if(pontos[i] != null) {
@@ -74,7 +77,7 @@ public class CampoGUI extends JPanel {
                 pontuacoes_fileira[i].setText("");
             }
         }
-        if(elementoNull) { throw new Exception("Elemento nulo dentro do array!"); }
+        if(elementoNull) { throw new NullPointerException("Elemento nulo dentro do array!"); }
     }
 
     /**
@@ -84,7 +87,7 @@ public class CampoGUI extends JPanel {
      * @throws Exception Se a matriz campo for null, se alguma fileiraGUI for null, se alguma cartaGUI for null
      */
     public void setCampo(CartaGUI[][] campo) throws Exception{
-        if(campo == null) { throw new Exception("Campo Null"); }
+        if(campo == null) { throw new NullPointerException("Campo Null"); }
         if(campo.length == 0){
             for(int i = 0; i < fileiras.length; i++){
                 fileiras[i].setFileira(new CartaGUI[0]);

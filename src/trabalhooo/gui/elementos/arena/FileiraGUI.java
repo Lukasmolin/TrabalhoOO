@@ -23,7 +23,7 @@ public class FileiraGUI extends JPanel {
      * @throws Exception se cartas for null ou se algum indice de cartas for null
      */
     public void setFileira(CartaGUI[] cartas) throws Exception{
-        if (cartas == null) { throw new Exception("Array de CartaGUI Null!"); }
+        if (cartas == null) { throw new NullPointerException("Array de CartaGUI Null!"); }
 
         removeAll();
         if(cartas.length == 0){
@@ -33,7 +33,7 @@ public class FileiraGUI extends JPanel {
                 if(carta == null) {
                     removeAll();
                     add(new CartaGUI());
-                    throw new Exception("CartaGUI Null!");
+                    throw new NullPointerException("CartaGUI Null!");
                 }
                 add(carta);
             }

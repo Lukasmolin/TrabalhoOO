@@ -123,7 +123,7 @@ public class Gui extends JFrame{
      * @throws Exception se o array ou algum elemento nele contido for null
      */
     public void setMaoUm(CartaInfo[] mao) throws Exception{
-        if(mao == null) { throw new Exception("Mao null!"); }
+        if(mao == null) { throw new NullPointerException("Mao null!"); }
         CartaGUI[] novaMao = converteCartas(mao);
         jogadores[0].setMao(novaMao);
     }
@@ -135,7 +135,7 @@ public class Gui extends JFrame{
      * @throws Exception se o array ou algum elemento nele contido for null
      */
     public void setMaoDois(CartaInfo[] mao) throws Exception{
-        if(mao == null) { throw new Exception("Mao null!"); }
+        if(mao == null) { throw new NullPointerException("Mao null!"); }
         CartaGUI[] novaMao = converteCartas(mao);
         jogadores[1].setMao(novaMao);
     }
@@ -149,7 +149,7 @@ public class Gui extends JFrame{
     private static CartaGUI[] converteCartas(CartaInfo[] cartas) throws Exception{
         CartaGUI[] novasCartas = new CartaGUI[cartas.length];
         for(int i = 0; i < novasCartas.length; i++){
-            if(cartas == null) { throw new Exception("CartaInfo Null!"); }
+            if(cartas == null) { throw new NullPointerException("CartaInfo Null!"); }
             novasCartas[i] = new CartaGUI(cartas[i]);
         }
         return novasCartas;
@@ -170,7 +170,7 @@ public class Gui extends JFrame{
      * @throws Exception se pontos for null
      */
     public void setPontosJogadorUm(String pontos) throws Exception{
-        if(pontos == null) { throw new Exception("Pontos Null!"); }
+        if(pontos == null) { throw new NullPointerException("Pontos Null!"); }
         jogadores[0].setPontuacao(pontos);
     }
 
@@ -180,7 +180,7 @@ public class Gui extends JFrame{
      * @throws Exception se pontos for null
      */
     public void setPontosJogadorDois(String pontos) throws Exception{
-        if(pontos == null) { throw new Exception("Pontos Null!"); }
+        if(pontos == null) { throw new NullPointerException("Pontos Null!"); }
         jogadores[1].setPontuacao(pontos);
     }
 
@@ -227,19 +227,21 @@ public class Gui extends JFrame{
     }
 
     /**
-     * converteU
-     * @param campo
-     * @return
-     * @throws Exception
+     * Converte um campo de CartaInfo em CartaGUI
+     * @param campo a ser convertido
+     * @return campo convertido
+     * @throws Exception se o campo ou algum de seus elementos for null
      */
     private static CartaGUI[][] converteCampo(CartaInfo[][] campo) throws Exception{
-        if(campo == null) { throw new Exception("Campo de CartaInfo null"); }
+        if(campo == null) { throw new NullPointerException("Campo de CartaInfo null"); }
         CartaGUI[][] novo = new CartaGUI[campo.length][];
         for(int i = 0; i < novo.length; i++){
-            if(campo[i] == null) { throw new Exception("Fileira "+ i +" do campo é null"); }
+            if(campo[i] == null) { throw new NullPointerException("Fileira "+ i +" do campo é null"); }
+
             novo[i] = new CartaGUI[campo[i].length];
             for(int j = 0; j < novo[i].length; j++){
-                if(campo[i][j] == null) { throw new Exception ("CartaInfo null\nFileira: "+i+"| indice: "+j); }
+                if(campo[i][j] == null) { throw new NullPointerException ("CartaInfo null\nFileira: "+i+"| indice: "+j); }
+
                 novo[i][j] = new CartaGUI(campo[i][j]);
             }
         }
@@ -257,11 +259,17 @@ public class Gui extends JFrame{
         validate();
     }
 
-    public CartaGUI[] converteClima(CartaInfo[] clima) throws Exception{
-        if(clima == null) { throw new Exception("Lista de cartaClima Null!"); }
+    /**
+     * Converte uma fileira de climas
+     * @param clima climas
+     * @return climas convertidos
+     * @throws Exception se o array ou pelo menos um de seus elementos for nulo
+     */
+    private static CartaGUI[] converteClima(CartaInfo[] clima) throws Exception{
+        if(clima == null) { throw new NullPointerException("Lista de cartaClima Null!"); }
         CartaGUI[] novo = new CartaGUI[clima.length];
         for(int i = 0; i < clima.length; i++){
-            if(clima[i] == null) { throw new Exception("CartaClima Null no indice: " +i); }
+            if(clima[i] == null) { throw new NullPointerException("CartaClima Null no indice: " +i); }
             novo[i] = new CartaGUI(clima[i]);
         }
         return novo;

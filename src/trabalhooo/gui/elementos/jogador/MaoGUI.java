@@ -48,7 +48,7 @@ public class MaoGUI extends JFrame implements MouseListener {
      */
     public void set(CartaGUI[] mao) throws Exception {
         if (mao == null) {
-            throw new Exception("Mão é nula");
+            throw new NullPointerException("Mão é nula");
         }
 
         if (mao.length == 0)
@@ -68,9 +68,8 @@ public class MaoGUI extends JFrame implements MouseListener {
         this.mao.clear();
         painel.removeAll();
         for (int i = 0; i < mao.length; i++) {
-            if (mao[i] == null) {
-                throw new Exception("CartaGUI Null na Mao!" + i);
-            }
+            if (mao[i] == null) { throw new NullPointerException("CartaGUI Null na Mao!" + i); }
+            
             this.mao.add(mao[i]);
             mao[i].addMouseListener(this);
             painel.add(mao[i]);
@@ -106,10 +105,10 @@ public class MaoGUI extends JFrame implements MouseListener {
     //Eventos MouseListener
     @Override
     public void mouseClicked(MouseEvent e) {
-        //this.setVisible(false);
         if(jogador != null && e.getSource() instanceof CartaGUI){
             CartaGUI fonte = (CartaGUI)e.getSource();
             jogador.jogadaFeita(fonte.getNome());
+            this.setVisible(false);
         }
     }
 

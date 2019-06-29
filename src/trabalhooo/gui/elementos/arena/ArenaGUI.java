@@ -95,7 +95,7 @@ public class ArenaGUI extends JPanel {
      * @param climas cartas de clima
      */
     public void setClimas(CartaGUI[] climas) throws Exception{
-        if(climas == null) { throw new Exception("climas NULL"); }
+        if(climas == null) { throw new NullPointerException("climas NULL"); }
         
         if(climas.length == 0){
             limpaClimas();
@@ -105,7 +105,7 @@ public class ArenaGUI extends JPanel {
             
             //Adiciona cartas          
             for(int i = 0; i < climas.length; i++){
-                if(climas[i] == null) { throw new Exception("CartaClima Null! Indice: " +i); }
+                if(climas[i] == null) { throw new NullPointerException("CartaClima Null! Indice: " +i); }
                 
                 climas_panel.add(climas[i]);
             }
