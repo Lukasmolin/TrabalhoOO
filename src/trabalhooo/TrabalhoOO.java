@@ -23,27 +23,27 @@ public class TrabalhoOO {
     
     
     public static void main(String[] args) {
-       Jogador p1 = new Jogador("Jose");
-       Jogador p2 = new Jogador("Maria"); 
 
-       Jogo novoJogo = new Jogo (p1,p2);
-       
-       novoJogo.jogadorInicial();
-       
-       novoJogo.Jogo(novoJogo);
-       
-       System.out.println(novoJogo.jogadorInicial().getNome());
-       
-       novoJogo.setFaccaoJogadorUm(Faccao.MONSTROS);
-       novoJogo.setFaccaoJogadorDois(Faccao.NILFGAARD);
-       
-       System.out.println(p1.getNome());
-       
-       for(int i=0; i<p1.getMao().length;i++){
-           System.out.println("");
-           System.out.println("| "+p1.getMao()[i].getNome()+" |");
-       }
+        try {
+            Jogador p1 = new Jogador("Jose");
+            Jogador p2 = new Jogador("Maria");
+            
+            Jogo novoJogo = new Jogo (p1,p2);
+            
+            novoJogo.setFaccaoJogadorUm(Faccao.MONSTROS);
+            novoJogo.setFaccaoJogadorDois(Faccao.NILFGAARD);
+            
+            novoJogo.jogadorInicial();
+            
+            novoJogo.Jogo(novoJogo);
+            
+            System.out.println("Vencedor é "+novoJogo.getVencedor());
+        } catch (Exception ex) {
+            Logger.getLogger(TrabalhoOO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        }
        
     }
 
-}
+

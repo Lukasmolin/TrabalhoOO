@@ -21,6 +21,7 @@ public class Jogo {
     private boolean fimdeJogo = false;
     private boolean fimdeRodada = false;
     private final Efeito efeito = new Efeito(tabuleiro, this);
+    private Jogador vencedor;
     
     /**
      * 
@@ -31,6 +32,10 @@ public class Jogo {
         jogadorUm = JogadorUm;
         jogadorDois = JogadorDois;
         tabuleiro = new Tabuleiro(jogadorUm, jogadorDois);
+    }
+    
+    public Jogador getVencedor(){
+        return this.vencedor;
     }
     
     public Jogador getJogadorUm(){
@@ -199,7 +204,11 @@ public class Jogo {
     }
     
     public boolean verificaVidas(){
-        if (jogadorUm.GetVidas()==0 || jogadorDois.GetVidas()==0){
+        if (jogadorUm.GetVidas()==0){
+            vencedor = jogadorUm;
+            return true;
+        } else if(jogadorDois.GetVidas()==0){
+            vencedor = jogadorDois;
             return true;
         }
         else 
