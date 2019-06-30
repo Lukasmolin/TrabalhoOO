@@ -9,33 +9,23 @@ package trabalhooo.jogo.cartas;
  *
  * @author izabe
  */
-public class CartaEspiao extends CartaPontuada{
+public class CartaHeroi extends CartaPontuada{
     
     private final String descricao;
 
-    public CartaEspiao(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+    public CartaHeroi(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
         super(nome, faccao, fileira, tipo, pontuacao);
-        this.descricao = "Permite comprar duas cartas do baralho, mas deve ser posicionada nas fileiras adversárias, ou seja, sua pontuação vai somar para o inimigo. ";
+        this.descricao = "Herói, não é afetada por nenhuma carta especial ou de habilidade";
     }
     
-    
-    
-    /**
-     * Retorna a descricao
-     * @return 
-     */
     public String getDescricao(){
         return this.descricao;
     }
     
-    /**
-     * 
-     * @param efeito 
-     */
+
     @Override
     public void getEfeito(Efeito efeito) {
-        efeito.CartaEspiao(this);
-        
+        ;
     }
     
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import trabalhooo.jogo.cartas.Carta;
 import trabalhooo.jogo.cartas.CartaPontuada;
+import trabalhooo.jogo.cartas.Efeito;
 
 /**
  *
@@ -20,19 +21,21 @@ public class Fileira {
      */
     private List<Carta> fileira = new ArrayList<>();
     private int pontuacao = 0;
+    private Carta especial;
+    private boolean temClima = false;
     
     /**
      * Adiciona carta a esta fileira
      * @param carta a ser adicionada
      */
     public void add(Carta carta){
+        carta.getEfeito(new Efeito());
         fileira.add(carta);
-        carta.getEfeito();
         atualizaPontuacao();
     }
     
     /**
-     * Retorna uma cópia das cartas contidas na fileira
+     * Retorna uma cópia das cartas contidas na fileir
      * @return array cópia de Carta contida na fileira
      */
     public Carta[] getCartas(){
@@ -45,6 +48,10 @@ public class Fileira {
      * @return pontuação total da fileira
      */
     public int getPontuacao(){
+        
+        if (this.temClima==true){
+            return this.fileira.size();
+        }
         return this.pontuacao;
     }
     
@@ -88,5 +95,17 @@ public class Fileira {
      */
     public int quantidadeCartas(){
         return fileira.size();
+    }
+    
+    /**
+     * Coloca carta especiais, como cartas de Clima e Commander's Horn ao lado da fileira;
+     * @param carta 
+     */
+    public void setEspecial(Carta carta){
+        this.especial = carta;
+    }
+    
+    public void setClima(boolean b){
+        this.temClima = b;
     }
 }

@@ -7,6 +7,7 @@ package trabalhooo.jogo;
 
 import trabalhooo.jogo.cartas.*;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -19,16 +20,30 @@ public class Jogo {
     private int contaJogadas = 0;
     private boolean fimdeJogo = false;
     private boolean fimdeRodada = false;
+    private final Efeito efeito = new Efeito(tabuleiro, this);
+    private Jogador vencedor;
     
     /**
      * 
      * @param nomeJogadorUm Nome do primeiro jogador
      * @param nomeJogadorDois Nome do segundo jogador
      */
-    public Jogo(String nomeJogadorUm, String nomeJogadorDois){
-        jogadorUm = new Jogador(nomeJogadorUm);
-        jogadorDois = new Jogador(nomeJogadorDois);
+    public Jogo(Jogador JogadorUm, Jogador JogadorDois){
+        jogadorUm = JogadorUm;
+        jogadorDois = JogadorDois;
         tabuleiro = new Tabuleiro(jogadorUm, jogadorDois);
+    }
+    
+    public Jogador getVencedor(){
+        return this.vencedor;
+    }
+    
+    public Jogador getJogadorUm(){
+        return this.jogadorUm;
+    }
+    
+    public Jogador getJogadorDois(){
+        return this.jogadorDois;
     }
     
     /**
@@ -52,11 +67,9 @@ public class Jogo {
      * @param faccao Facção selecionada pelo jogador
      */
     public void setFaccaoJogadorUm(Faccao faccao){
-        try {       
-            jogadorUm.setBaralho(faccao);
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
+             
+        jogadorUm.setBaralho(faccao);
+        
     }
     
     /**
@@ -64,11 +77,9 @@ public class Jogo {
      * @param faccao Facção selecionada pelo jogador
      */
     public void setFaccaoJogadorDois(Faccao faccao){
-        try {       
-            jogadorDois.setBaralho(faccao);
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
+              
+        jogadorDois.setBaralho(faccao);
+        
     }
     
     /**
@@ -107,16 +118,23 @@ public class Jogo {
     
     /**
      * Determina jogador inicial
+     * @return 
      */
     public  Jogador jogadorInicial(){
         
-        Random x = new Random();
-        int sorte = x.nextInt(3);
-        if (sorte==0){
+        Random random = new Random();
+        int sorteio = random.nextInt(2);
+        
+        if (sorteio==0){
             return jogadorUm;
         }
-        else 
+        
+        if (sorteio==1){
             return jogadorDois;
+        }
+        else
+            System.out.println("Vixi");
+            return null;
     }
     
     /**
@@ -181,5 +199,88 @@ public class Jogo {
         return null;     
     }
     
+    public Tabuleiro  getTabuleiro(){
+        return this.tabuleiro;
+    }
     
+    public boolean verificaVidas(){
+        if (jogadorUm.GetVidas()==0){
+            vencedor = jogadorUm;
+            return true;
+        } else if(jogadorDois.GetVidas()==0){
+            vencedor = jogadorDois;
+            return true;
+        }
+        else 
+            return false;
+    }
+    
+    public boolean verificaRodada(){
+        if(jogadorUm.getPassou()==true && jogadorDois.getPassou()==true){
+            return true;
+        }
+        else 
+            return false;
+    }
+    
+    public Carta escolheCarta(Jogador atual){
+        boolean escolha;
+        Scanner teclado = new Scanner(System.in);
+        
+        for (int i=0;i<atual.getMao().length;i++){
+            Carta escolhida = atual.getMao()[i];
+            escolha  = teclado.nextBoolean();
+            if (escolha==true){
+                return escolhida;
+            }
+        }
+        return null;
+    }
+    
+    public void verificaVencedorRodada (Jogo novoJogo) throws Exception{
+        if (novoJogo.getJogadorUm().GetVidas() > novoJogo.getJogadorDois().GetVidas()){
+            novoJogo.getJogadorDois().perdeVida();
+        }
+        else if (novoJogo.getJogadorDois().GetVidas() > novoJogo.getJogadorUm().GetVidas()){
+            novoJogo.getJogadorUm().perdeVida();
+        }
+        else 
+            novoJogo.getJogadorUm().perdeVida();
+            novoJogo.getJogadorDois().perdeVida();
+    }
+    
+    public void Jogo(Jogo novoJogo) throws Exception{
+       
+        boolean termina=false;
+        
+        
+        do{
+            Rodada(novoJogo);
+            novoJogo.contaJogadas++;
+            if (novoJogo.verificaVidas()==true){
+               termina=true; 
+            }
+            
+        } while(termina==false);
+        
+    }
+    
+    public static void Rodada(Jogo novoJogo) throws Exception{
+       
+        Scanner teclado = new Scanner(System.in);
+        
+        do{
+            
+            boolean passa;
+            passa = teclado.nextBoolean();
+            if (passa==false){
+                novoJogo.getJogadorAtual().jogaCarta(novoJogo.escolheCarta(novoJogo.getJogadorAtual()));
+                novoJogo.getJogadorAtual().setPassou(false);
+            }
+            else 
+                novoJogo.getJogadorAtual().setPassou(true);
+                novoJogo.verificaRodada();
+                novoJogo.verificaVencedorRodada(novoJogo);
+        } while (novoJogo.verificaRodada()==true);
+    }
 }

@@ -20,31 +20,26 @@ Essa classe vai se tornar abstrata no futuro
 public abstract class Carta {
     
     private final String nome;
+    private final String tipo;
     private String descricao;
     private Faccao faccao;
     private Tabuleiro tab;
     private int fileira;
     private int pontuacao;
     
-    
-    /**
-     * @deprecated Contrutor com fileira
-     * @param nome Nome da carta
-     * @param pontuacao Pontuação inicial da carta
-     * @param fileira  Fileira da carta
-     */
-    public Carta (String nome, int pontuacao, int fileira){
-        this.nome = nome;
-    }
-    
+        
     /**
      * Cria um objeto carta com os parametros passados
      * @param nome Nome da carta
      * @param faccao Faccao da carta
+     * @param fileira
+     * @param tipo
      */
-    protected Carta(String nome, Faccao faccao){
+    public Carta(String nome, Faccao faccao, int fileira, String tipo){
         this.nome = nome;
         this.faccao = faccao;
+        this.fileira = fileira;
+        this.tipo = tipo;
     }
     
     /**
@@ -89,9 +84,18 @@ public abstract class Carta {
     
     /**
      * Adiciona uma descricao a carta
+     * @param descricao
      */
     public void setDescricao(String descricao){
        this.descricao = descricao; 
+    }
+    
+    /**
+     * Retorna o atributo tipo
+     * @return 
+     */
+    public String getTipo(){
+        return this.tipo;
     }
     
     /**

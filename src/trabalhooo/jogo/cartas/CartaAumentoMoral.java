@@ -9,19 +9,19 @@ package trabalhooo.jogo.cartas;
  *
  * @author izabe
  */
-public class CartaEspiao extends CartaPontuada{
+public class CartaAumentoMoral extends CartaPontuada{
     
     private final String descricao;
 
-    public CartaEspiao(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+    public CartaAumentoMoral(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
         super(nome, faccao, fileira, tipo, pontuacao);
-        this.descricao = "Permite comprar duas cartas do baralho, mas deve ser posicionada nas fileiras adversárias, ou seja, sua pontuação vai somar para o inimigo. ";
+        this.descricao = "Aumenta um ponto de cada carta da mesma fileira.";
     }
     
     
     
     /**
-     * Retorna a descricao
+     * Retorna descrição
      * @return 
      */
     public String getDescricao(){
@@ -34,8 +34,7 @@ public class CartaEspiao extends CartaPontuada{
      */
     @Override
     public void getEfeito(Efeito efeito) {
-        efeito.CartaEspiao(this);
-        
+        efeito.CartaAumentoMoral(this);
     }
     
 }

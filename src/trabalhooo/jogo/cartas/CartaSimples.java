@@ -12,6 +12,10 @@ package trabalhooo.jogo.cartas;
 
 
 public class CartaSimples extends CartaPontuada{
+
+    public CartaSimples(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+        super(nome, faccao, fileira, tipo, pontuacao);
+    }
     
     /**
      * Contrutor da CartaSimples
@@ -19,9 +23,7 @@ public class CartaSimples extends CartaPontuada{
      * @param faccao Faccao da carta
      * @param pontuacao pontuacao inicial da carta
      */
-    public CartaSimples(String nome, Faccao faccao, int pontuacao){
-        super(nome, faccao, pontuacao);
-    }
+    
 
     @Override
     public void getEfeito(Efeito efeito) {

@@ -5,34 +5,26 @@
  */
 package trabalhooo.jogo.cartas;
 
-
 /**
  *
  * @author izabe
  */
-public class CartaEloForte extends CartaPontuada{
-    
-    private final String descricao; 
+public class CartaQueima extends CartaPontuada{
 
-    public CartaEloForte(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
-        super(nome, faccao, fileira, tipo, pontuacao);
-        this.descricao = "Dobra a pontuação de uma carta idêntica na fileira";
-    }
-   
+    private final String descricao;
     
-    /**
-     * Retorna descricao
-     * @return 
-     */
+    public CartaQueima(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+        super(nome, faccao, fileira, tipo, pontuacao);
+        this.descricao = "Queima a carta mais poderosa das fileiras inimigas.";
+    }
+    
     public String getDescricao(){
         return this.descricao;
     }
     
     @Override
     public void getEfeito(Efeito efeito) {
-       
-       efeito.cartaEloForte(this);
+        efeito.CartaQueima(this);
     }
-    
     
 }

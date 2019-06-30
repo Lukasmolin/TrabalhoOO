@@ -8,6 +8,7 @@ package trabalhooo.jogo;
 import java.util.ArrayList;
 import java.util.List;
 import trabalhooo.jogo.cartas.Carta;
+import trabalhooo.jogo.cartas.CartaLider;
 
 /**
  *
@@ -22,7 +23,8 @@ public class Campo {
     private static final byte FILEIRA_BALISTAS = 2;
     
     private Fileira[] campo;
-    private List<Carta> cemiterio;    
+    private List<Carta> cemiterio;   
+    private Carta lider;
     
     public Campo(){
         inicializaFileiras();
@@ -81,6 +83,7 @@ public class Campo {
      * @param carta 
      */
     public void addCarta(Carta carta){
+        
         switch (carta.getFileira()){
             case 1:
                 campo[FILEIRA_ESPADACHINS].add(carta);
@@ -102,5 +105,38 @@ public class Campo {
      */
     public List getCemiterio(){
         return this.cemiterio;
+    }
+    
+    /**
+     * 
+     * @param carta
+     */
+    public void setLider (Carta carta){
+        this.lider = carta;
+    }
+    
+    public Fileira getFileira(int fileira){
+        
+        if (fileira==1){
+            return this.campo[0];
+        } else if (fileira==2){
+            return this.campo[1];
+        } else if (fileira==3){
+            return this.campo[2];
+        }
+        return null;
+    }
+    
+    /**
+     * Verifica se CartaLider foi usada
+     * @param carta
+     * @return 
+     */
+    public boolean verificaUsoLider(CartaLider carta){
+        if (carta.getUsada()==true){
+            return true;
+        }
+        else
+            return false;
     }
 }

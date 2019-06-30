@@ -5,16 +5,18 @@
  */
 package trabalhooo.jogo;
 
-import trabalhooo.jogo.cartas.Carta;
-import trabalhooo.jogo.Jogo;
+import trabalhooo.jogo.cartas.CartaLider;
 
 /**
  *
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
 public class Tabuleiro {
-    private Jogador jogadorUm, jogadorDois;
-    private Campo campoUm, campoDois;
+    private final Jogador jogadorUm;
+    private final Jogador jogadorDois;
+    private final Campo campoUm;
+    //CartaClima cartaClima;
+    private final Campo campoDois;
     //CartaClima cartaClima;
     
     public Tabuleiro(Jogador jogadorUm, Jogador jogadorDois){
@@ -53,6 +55,15 @@ public class Tabuleiro {
         }
         return null; 
     }
+    
+    /**
+     * 
+     */
+    public void setLider(){
+        campoUm.setLider(jogadorUm.getLider());
+        campoDois.setLider(jogadorDois.getLider());
+    }
+    
     
     
 }

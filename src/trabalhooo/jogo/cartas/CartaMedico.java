@@ -9,12 +9,22 @@ package trabalhooo.jogo.cartas;
  *
  * @author izabe
  */
-public class ClasseMedico extends CartaPontuada{
+public class CartaMedico extends CartaPontuada{
     
     private final String descricao;
-    public ClasseMedico(String nome, Faccao faccao, int pontuacao) {
-        super(nome, faccao, pontuacao);
+
+    public CartaMedico(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
+        super(nome, faccao, fileira, tipo, pontuacao);
         this.descricao = "Traz de volta de uma carta de unidade a sua escolha da pilha de descarte. ";
+    }
+   
+    
+    /**
+     * Retorna descricao 
+     * @return 
+     */
+    public String getDescricao(){
+        return this.descricao;
     }
 
     @Override
