@@ -15,7 +15,7 @@ public class RepositorioGUI {
     private static boolean estaPronto = false;
     private static Path pasta;
     private static Dimension tamanho;
-    private static Map<String, Image> cache = new HashMap<>(30);
+    private static Map<String, Image> cache = new HashMap<>();
     private RepositorioGUI(){};
 
     //Temp
@@ -29,9 +29,19 @@ public class RepositorioGUI {
     public static void setCaminho(String caminho) throws Exception{
         if(caminho == null) { throw new NullPointerException("O caminho é null!"); }
         Path p = FileSystems.getDefault().getPath(caminho);
-        System.out.println(p.toString()); //Temp
         if (!Files.exists(p)) { throw new Exception("Caminho da pasta de imagens não encontrado!"); }
         pasta = p;
+    }
+
+    /**
+     * Retorna uma string com o caminho selecionado ou em branco caso nenhum tenha sido selecionado
+     * @return Caminho
+     */
+    public static String getCaminho(){
+        if(pasta != null)
+            return pasta.toString();
+        else
+            return "";
     }
 
     /**
@@ -40,19 +50,17 @@ public class RepositorioGUI {
      * @throws Exception Se não conseguir resgatar a imagem
      */
     public static Image getImagem(String nomeDaCarta) throws Exception{
-        if(img == null){
-            Image original = ImageIO.read(new File("C:/Users/Lucas/Pictures/Saved Pictures/PurpleCode.jpg"));
-            img = original.getScaledInstance((int)tamanho.getWidth(), (int)tamanho.getHeight(), Image.SCALE_FAST);
+        if(tamanho == null) { throw new NullPointerException("O tamanho não foi inicializado!"); }
+        if(pasta == null) { throw new Exception("O caminho não foi inicializado."); }
+
+        nomeDaCarta = nomeDaCarta.replace(" ", "_");
+        if(!cache.containsKey(nomeDaCarta)){
+            Image original = ImageIO.read(new File(pasta.toString(), nomeDaCarta+".png"));
+            Image escalada = original.getScaledInstance((int)tamanho.getWidth(), (int)tamanho.getHeight(), Image.SCALE_FAST);
+            cache.put(nomeDaCarta, escalada);
         }
-        System.out.println(nomeDaCarta+ "  ");
-        return img;
         
-        /*if (pasta == null) { throw new Exception("Caminho para as imagens não foi setado!"); }
-        String textoCaminho = pasta.toString() + "/" + nomeDaCarta + ".jpg";
-        Path caminho = FileSystems.getDefault().getPath(textoCaminho);
-        if (!Files.exists(caminho)) { throw new Exception("Caminho para a imagem inválido: " + textoCaminho); }
-        ImageIcon imagem = new ImageIcon(caminho.toString());
-        return imagem;*/
+        return cache.get(nomeDaCarta);
     }
 
     /**

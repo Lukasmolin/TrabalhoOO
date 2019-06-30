@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import trabalhooo.gui.elementos.arena.ArenaGUI;
 import trabalhooo.gui.elementos.carta.CartaGUI;
+import trabalhooo.gui.elementos.carta.RepositorioGUI;
 import trabalhooo.gui.elementos.jogador.JogadorGUI;
 
 /**
@@ -281,6 +282,23 @@ public class Gui extends JFrame{
     public void limpaClima(){
         arena.limpaClimas();
         validate();
+    }
+
+    /**
+     * Seta o caminho para a pasta com as imagens
+     * @param caminho onde estão as imagens
+     * @throws Exception Se o caminho nao existir ou for nulo
+     */
+    public static void SetCaminho(String caminho) throws Exception{
+        RepositorioGUI.setCaminho(caminho);
+    }
+
+    /**
+     * Retorna o caminho atual para a pasta de imagens
+     * @return caminho atual se houver um caminho valido anteriormente configurado, senão string vazia
+     */
+    public static String getCaminho(){
+        return RepositorioGUI.getCaminho();
     }
 
 }
