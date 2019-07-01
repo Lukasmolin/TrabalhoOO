@@ -1,11 +1,8 @@
 package trabalhooo.gui;
-
 import java.awt.Dimension;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import trabalhooo.gui.elementos.arena.ArenaGUI;
 import trabalhooo.gui.elementos.carta.CartaGUI;
 import trabalhooo.gui.elementos.carta.RepositorioGUI;
@@ -81,27 +78,68 @@ public class Gui extends JFrame{
      * @param nomeJogadorDois nome do segundo jogador
      */
     private void inicializaElementos(String nomeJogadorUm, String nomeJogadorDois){
-        jogadores[0] = new JogadorGUI(nomeJogadorUm, "BaralhoUm", "3");
-        jogadores[1] = new JogadorGUI(nomeJogadorDois, "BaralhoDois", "3");
+        jogadores[0] = new JogadorGUI(nomeJogadorUm);
+        jogadores[1] = new JogadorGUI(nomeJogadorDois);
         arena = new ArenaGUI();
         janela.add(jogadores[0]);
         janela.add(arena);
         janela.add(jogadores[1]);
     }
+
     /**
      * seta o valor da vida do jogador
      * @param vida Vida atual
+     * @throws Exception se vida for null ou vazia
      */
-    public void setVidaJogadorUm(String vida){
+    public void setVidaJogadorUm(String vida) throws Exception{
+        if (vida == null) { throw new NullPointerException("faccao Null!"); }
+        if (vida.equals("")) {
+            jogadores[0].setVidas(vida);
+            throw new Exception("Informação vazia!");
+        }
         jogadores[0].setVidas(vida);
     }
     
     /**
      * seta o valor da vida do jogador
      * @param vida Vida atual
+     * @throws Exception se vida for null ou vazia
      */
-    public void setVidaJogadorDois(String vida){
+    public void setVidaJogadorDois(String vida) throws Exception{
+        if (vida == null) { throw new NullPointerException("faccao Null!"); }
+        if (vida.equals("")) {
+            jogadores[1].setVidas(vida);
+            throw new Exception("Informação vazia!");
+        }
         jogadores[1].setVidas(vida);
+    }
+
+    /**
+     * Seta a faccao do baralho do jogador
+     * @param faccao
+     * @throws Exception se faccao for null ou vazio
+     */
+    public void setFaccaoJogadorUm(String faccao) throws Exception{
+        if (faccao == null) { throw new NullPointerException("faccao Null!"); }
+        if (faccao.equals("")) {
+            jogadores[0].setFaccao(faccao);
+            throw new Exception("Informação vazia!");
+        }
+        jogadores[0].setFaccao(faccao);
+    }
+
+    /**
+     * Seta a faccao do baralho do jogador
+     * @param faccao
+     * @throws Exception se faccao for null ou vazio
+     */
+    public void setFaccaoJogadorDois(String faccao) throws Exception{
+        if (faccao == null) { throw new NullPointerException("faccao Null!"); }
+        if (faccao.equals("")) {
+            jogadores[1].setFaccao(faccao);
+            throw new Exception("Informação vazia!");
+        }
+        jogadores[1].setFaccao(faccao);
     }
 
     /**
@@ -168,20 +206,28 @@ public class Gui extends JFrame{
     /**
      * Seta os pontos do jogador
      * @param pontos pontos do jogador no momento
-     * @throws Exception se pontos for null
+     * @throws Exception se pontos for null ou vazia
      */
     public void setPontosJogadorUm(String pontos) throws Exception{
         if(pontos == null) { throw new NullPointerException("Pontos Null!"); }
+        if(pontos.equals("")) {
+            jogadores[0].setPontuacao(pontos);
+            throw new Exception("Informação vazia!");
+        }
         jogadores[0].setPontuacao(pontos);
     }
 
     /**
      * Seta os pontos do jogador
      * @param pontos pontos do jogador no momento
-     * @throws Exception se pontos for null
+     * @throws Exception se pontos for null ou vazia
      */
     public void setPontosJogadorDois(String pontos) throws Exception{
         if(pontos == null) { throw new NullPointerException("Pontos Null!"); }
+        if(pontos.equals("")) {
+            jogadores[1].setPontuacao(pontos);
+            throw new Exception("Informação vazia!");
+        }
         jogadores[1].setPontuacao(pontos);
     }
 
