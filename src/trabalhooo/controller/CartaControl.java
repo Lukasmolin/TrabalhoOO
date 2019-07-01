@@ -1,7 +1,6 @@
 package trabalhooo.controller;
 
 import trabalhooo.gui.CartaInfo;
-import trabalhooo.jogo.cartas.Carta;
 
 /**
  * Classe usada pelo controller para passar informações de carta para a GUI

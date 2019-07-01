@@ -12,6 +12,9 @@ import trabalhooo.gui.elementos.jogador.JogadorGUI;
  * Classe que representa toda a interface gráfica da aplicação e encapsula as operações necessárias
  */
 public class Gui extends JFrame{
+    //Serializable
+    private static final long serialVersionUID = 1L;
+
     private static int altura = 0;
     private static int largura = 0;
 

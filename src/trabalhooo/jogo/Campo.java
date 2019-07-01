@@ -103,7 +103,7 @@ public class Campo {
      * 
      * @return Retorna o cemiterio
      */
-    public List getCemiterio(){
+    public List<Carta> getCemiterio(){
         return this.cemiterio;
     }
     

@@ -10,6 +10,8 @@ import trabalhooo.gui.elementos.carta.CartaGUI;
  * Representa o painel de informações de um jogador
  */
 public class JogadorGUI extends JPanel implements MaoGUIListener {
+    //Serializable
+    private static final long serialVersionUID = 1L;
     
     private final String nome;
     private GuiListener gui;

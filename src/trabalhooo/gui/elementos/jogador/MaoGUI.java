@@ -15,6 +15,9 @@ import trabalhooo.gui.Gui;
 import trabalhooo.gui.elementos.carta.CartaGUI;
 
 public class MaoGUI extends JFrame implements MouseListener {
+    //Serializable
+    private static final long serialVersionUID = 1L;
+
     private static final double PROPORCAO_ALTURA = 0.20;
     private Dimension tamanho;
     private MaoGUIListener jogador;

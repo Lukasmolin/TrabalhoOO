@@ -87,7 +87,7 @@ public final class Baralho {
      * 
      * @return retorna o baralho do jogador
      */
-    public List getBaralho(){
+    public List<Carta> getBaralho(){
         return this.baralho;
     }
     

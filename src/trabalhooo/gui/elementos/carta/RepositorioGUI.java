@@ -17,10 +17,7 @@ public class RepositorioGUI {
     private static Dimension tamanho;
     private static Map<String, Image> cache = new HashMap<>();
     private RepositorioGUI(){};
-
-    //Temp
-    private static Image img;
-
+    
     /**
      * Seta o caminho da pasta onde estão as imagens do Jogo
      * @param caminho Caminho da pasta

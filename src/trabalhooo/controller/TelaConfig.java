@@ -13,13 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import trabalhooo.gui.Gui;
-
 /**
  * Tela de configuração pre-jogo
  */
 public class TelaConfig extends JFrame implements MouseListener {
 
+    //Serializable
+    private static final long serialVersionUID = 1L;
+    
     private JPanel janela = new JPanel();
     private Controller control;
 
