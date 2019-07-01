@@ -22,11 +22,13 @@ public class Campo {
     private static final byte FILEIRA_ARQUEIROS = 1;
     private static final byte FILEIRA_BALISTAS = 2;
     
+    private Jogo jogo;
     private Fileira[] campo;
     private List<Carta> cemiterio;   
     private Carta lider;
     
-    public Campo(){
+    public Campo(Jogo jogo){
+        this.jogo = jogo;
         inicializaFileiras();
     }
     
@@ -37,7 +39,7 @@ public class Campo {
         cemiterio = new ArrayList<>();
         campo = new Fileira[3];
         for(Fileira f : campo){
-            f = new Fileira();
+            f = new Fileira(jogo);
         }
     }
     

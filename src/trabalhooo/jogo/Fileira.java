@@ -21,15 +21,19 @@ public class Fileira {
      */
     private List<Carta> fileira = new ArrayList<>();
     private int pontuacao = 0;
-    private Carta especial;
     private boolean temClima = false;
+    private Jogo jogo;
+
+    public Fileira(Jogo jogo){
+        this.jogo = jogo;
+    }
     
     /**
      * Adiciona carta a esta fileira
      * @param carta a ser adicionada
      */
     public void add(Carta carta){
-        carta.getEfeito(new Efeito());
+        carta.getEfeito(new Efeito(jogo));
         fileira.add(carta);
         atualizaPontuacao();
     }
@@ -102,7 +106,7 @@ public class Fileira {
      * @param carta 
      */
     public void setEspecial(Carta carta){
-        this.especial = carta;
+        //this.especial = carta;
     }
     
     public void setClima(boolean b){

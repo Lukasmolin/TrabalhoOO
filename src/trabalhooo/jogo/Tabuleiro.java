@@ -5,8 +5,6 @@
  */
 package trabalhooo.jogo;
 
-import trabalhooo.jogo.cartas.CartaLider;
-
 /**
  *
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
@@ -19,11 +17,11 @@ public class Tabuleiro {
     private final Campo campoDois;
     //CartaClima cartaClima;
     
-    public Tabuleiro(Jogador jogadorUm, Jogador jogadorDois){
+    public Tabuleiro(Jogador jogadorUm, Jogador jogadorDois, Jogo jogo){
         this.jogadorUm = jogadorUm;
         this.jogadorDois = jogadorDois;
-        campoUm = new Campo();
-        campoDois = new Campo();
+        campoUm = new Campo(jogo);
+        campoDois = new Campo(jogo);
     }
     
     /**

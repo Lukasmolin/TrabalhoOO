@@ -11,21 +11,10 @@ package trabalhooo.jogo.cartas;
  * @author izabe
  */
 public class CartaEloForte extends CartaPontuada{
-    
-    private final String descricao; 
 
     public CartaEloForte(String nome, Faccao faccao, int fileira, String tipo, int pontuacao) {
         super(nome, faccao, fileira, tipo, pontuacao);
-        this.descricao = "Dobra a pontuação de uma carta idêntica na fileira";
-    }
-   
-    
-    /**
-     * Retorna descricao
-     * @return 
-     */
-    public String getDescricao(){
-        return this.descricao;
+        super.setDescricao("Dobra a pontuação de uma carta idêntica na fileira");
     }
     
     @Override

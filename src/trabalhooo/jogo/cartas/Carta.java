@@ -89,6 +89,10 @@ public abstract class Carta {
     public void setDescricao(String descricao){
        this.descricao = descricao; 
     }
+
+    public String getDescricao(){
+        return this.descricao;
+    }
     
     /**
      * Retorna o atributo tipo
@@ -96,6 +100,14 @@ public abstract class Carta {
      */
     public String getTipo(){
         return this.tipo;
+    }
+
+    /**
+     * Retorna a faccao da carta
+     * @return
+     */
+    public Faccao getFaccao(){
+        return this.faccao;
     }
     
     /**

@@ -14,15 +14,24 @@ import java.util.Scanner;
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
 public class Jogo {
-    private boolean pronto = false;
     private Jogador jogadorUm, jogadorDois;
     private Tabuleiro tabuleiro;
     private int contaJogadas = 0;
     private boolean fimdeJogo = false;
     private boolean fimdeRodada = false;
-    private final Efeito efeito = new Efeito(tabuleiro, this);
     private Jogador vencedor;
-    
+  
+    /**
+     * 
+     * @param nomeJogadorUm Nome do primeiro jogador
+     * @param nomeJogadorDois Nome do segundo jogador
+     */
+    public Jogo(String JogadorUm, String JogadorDois){
+        this.jogadorUm = new Jogador(JogadorUm);
+        this.jogadorDois = new Jogador(JogadorDois);
+        tabuleiro = new Tabuleiro(jogadorUm, jogadorDois, this);
+    }
+
     /**
      * 
      * @param nomeJogadorUm Nome do primeiro jogador
@@ -31,7 +40,7 @@ public class Jogo {
     public Jogo(Jogador JogadorUm, Jogador JogadorDois){
         jogadorUm = JogadorUm;
         jogadorDois = JogadorDois;
-        tabuleiro = new Tabuleiro(jogadorUm, jogadorDois);
+        tabuleiro = new Tabuleiro(jogadorUm, jogadorDois, this);
     }
     
     public Jogador getVencedor(){
@@ -249,11 +258,9 @@ public class Jogo {
             novoJogo.getJogadorDois().perdeVida();
     }
     
-    public void Jogo(Jogo novoJogo) throws Exception{
+    public void jogo(Jogo novoJogo) throws Exception{
        
         boolean termina=false;
-        
-        
         do{
             Rodada(novoJogo);
             novoJogo.contaJogadas++;

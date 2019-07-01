@@ -12,17 +12,16 @@ package trabalhooo.jogo.cartas;
 public class CartaEspecial extends Carta{
     
     private int id;
-    private String descricao;
     public CartaEspecial(String nome, Faccao faccao, int fileira, String tipo,int id) {
         super(nome, faccao, fileira, tipo);
         if (this.id==004){
-            this.descricao = "Substitui uma carta no campo que retorna para a mao do jogador.";
+            super.setDescricao("Substitui uma carta no campo que retorna para a mao do jogador.");
         }
         if (this.id==005){
-            this.descricao = "Dobra a pontuacao de todas as cartas da fileira.";
+            super.setDescricao("Dobra a pontuacao de todas as cartas da fileira.");
         }
         else {
-            this.descricao = "Destroi a carta mais forte no campo inimigo."; 
+            super.setDescricao("Destroi a carta mais forte no campo inimigo."); 
         }
     }
     

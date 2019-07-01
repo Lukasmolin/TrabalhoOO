@@ -21,8 +21,8 @@ public class Efeito {
     private Tabuleiro tab;
     private Jogo j;
     
-    public Efeito (Tabuleiro tab, Jogo j){
-        this.tab = tab;
+    public Efeito (Jogo j){
+        this.tab = j.getTabuleiro();
         this.j = j;
     }
     
