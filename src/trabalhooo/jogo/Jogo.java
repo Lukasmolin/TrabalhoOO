@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhooo.jogo;
 
 import trabalhooo.jogo.cartas.*;
@@ -76,17 +71,14 @@ public class Jogo {
      * @param faccao Facção selecionada pelo jogador
      */
     public void setFaccaoJogadorUm(Faccao faccao){
-             
-        jogadorUm.setBaralho(faccao);
-        
+        jogadorUm.setBaralho(faccao);        
     }
     
     /**
      * Escolhe a facção do Jogador Dois
      * @param faccao Facção selecionada pelo jogador
      */
-    public void setFaccaoJogadorDois(Faccao faccao){
-              
+    public void setFaccaoJogadorDois(Faccao faccao){              
         jogadorDois.setBaralho(faccao);
         
     }
@@ -129,21 +121,18 @@ public class Jogo {
      * Determina jogador inicial
      * @return 
      */
-    public  Jogador jogadorInicial(){
+    public Jogador jogadorInicial(){
         
         Random random = new Random();
         int sorteio = random.nextInt(2);
         
-        if (sorteio==0){
+        if (sorteio==0)
             return jogadorUm;
-        }
-        
-        if (sorteio==1){
+            
+        if (sorteio==1)
             return jogadorDois;
-        }
-        else
-            System.out.println("Vixi");
-            return null;
+
+        return null;
     }
     
     /**
@@ -173,7 +162,6 @@ public class Jogo {
                         return jogadorUm;
                 }
             }
-        
         return null;     
     }
     
@@ -204,7 +192,6 @@ public class Jogo {
                         return jogadorDois;
                 }
             }
-        
         return null;     
     }
     
@@ -265,7 +252,7 @@ public class Jogo {
             Rodada(novoJogo);
             novoJogo.contaJogadas++;
             if (novoJogo.verificaVidas()==true){
-               termina=true; 
+               termina=true;
             }
             
         } while(termina==false);

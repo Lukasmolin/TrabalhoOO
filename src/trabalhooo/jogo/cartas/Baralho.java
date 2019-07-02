@@ -150,7 +150,9 @@ public final class Baralho {
         monstros.add(new CartaCoragem("Vampire Katakan",faccao,1,"Vampire",4));
         monstros.add(new CartaSimples("Werewolf",faccao,1,"Werewolf",5));
         monstros.add(new CartaSimples("wyvern",faccao,2,"Wyvern",2));
+        
         Collections.shuffle(monstros); //Mistura a lista
+        monstros.add(0, lider);
         return monstros;
     }  
     
@@ -198,7 +200,9 @@ public final class Baralho {
         nilfgaard.add(new CartaSimples("Young Emissary I",faccao,1,"Unit",5));
         nilfgaard.add(new CartaSimples("Young Emissary II",faccao,1,"Unit",5));
         nilfgaard.add(new CartaSimples("Zerrikanian Fire Scorpion",faccao,3,"Unit",5));
+        
         Collections.shuffle(nilfgaard); //Mistura a lista
+        nilfgaard.add(0, lider);
         return nilfgaard;
     }
     
@@ -243,8 +247,9 @@ public final class Baralho {
         reinosdonorte.add(new CartaSimples("Sabrina Glevissig",faccao,2,"Unit",4));
         reinosdonorte.add(new CartaHeroi("Philippa Eilhart",faccao,2,"Hero",10));
         reinosdonorte.add(new CartaSimples("Síle de Tansarville",faccao,2,"Unit",5));
-              
+
         Collections.shuffle(reinosdonorte); //Mistura a lista
+        reinosdonorte.add(0, lider);
         return reinosdonorte;
     }
     
@@ -296,12 +301,10 @@ public final class Baralho {
         ScoiaTael.add(new CartaSimples("Riordain",faccao,2,"Unit",1));
         ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit I",faccao,2,"Unit",4));
         ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit II",faccao,2,"Unit",4));
-        ScoiaTael.add(new CartaSimples("Toruviel",faccao,2,"Unit",2));
-        
-        
-        
+        ScoiaTael.add(new CartaSimples("Toruviel",faccao,2,"Unit",2));   
         
         Collections.shuffle(ScoiaTael); //Mistura a lista
+        ScoiaTael.add(0, lider);
         return ScoiaTael;
     }
     

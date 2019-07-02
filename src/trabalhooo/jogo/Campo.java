@@ -24,8 +24,8 @@ public class Campo {
     
     private Jogo jogo;
     private Fileira[] campo;
-    private List<Carta> cemiterio;   
-    private Carta lider;
+    private List<Carta> cemiterio;
+    private CartaLider lider;
     
     public Campo(Jogo jogo){
         this.jogo = jogo;
@@ -102,23 +102,29 @@ public class Campo {
     }
     
     /**
-     * 
-     * @return Retorna o cemiterio
+     * Retorna o cemiterio
+     * @return cemiterio
      */
     public List<Carta> getCemiterio(){
         return this.cemiterio;
     }
     
     /**
-     * 
+     * Seta a carta lider
      * @param carta
      */
     public void setLider (Carta carta){
-        this.lider = carta;
+        if(carta instanceof CartaLider){
+            this.lider = (CartaLider)carta;
+        }        
     }
     
-    public Fileira getFileira(int fileira){
-        
+    /**
+     * Retorna as fileiras do campo
+     * @param fileira desejada
+     * @return fileira escolhida ou null caso não exista
+     */
+    public Fileira getFileira(int fileira){        
         if (fileira==1){
             return this.campo[0];
         } else if (fileira==2){
@@ -135,10 +141,6 @@ public class Campo {
      * @return 
      */
     public boolean verificaUsoLider(CartaLider carta){
-        if (carta.getUsada()==true){
-            return true;
-        }
-        else
-            return false;
+        return carta.getUsada();
     }
 }
