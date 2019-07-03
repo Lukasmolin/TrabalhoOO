@@ -8,7 +8,6 @@ import trabalhooo.jogo.Tabuleiro;
 import trabalhooo.jogo.Jogo;
 import java.util.List;
 import trabalhooo.jogo.Campo;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -104,9 +103,7 @@ public class Efeito {
      * @param carta
      */
     public void CartaAgil(Carta carta){
-        Scanner teclado = new Scanner(System.in);
-        int escolha;
-        escolha = teclado.nextInt();
+        int escolha = j.getInputFileiraCartaAgil();
         if (escolha==1){
             carta.setFileira(escolha);
         }
@@ -145,10 +142,7 @@ public class Efeito {
      * @param carta
      */
     public void CartaAumentoMoral(Carta carta){
-        
-        Scanner teclado = new Scanner(System.in);
-        int fileira;
-        fileira = teclado.nextInt();
+        int fileira = j.getInputFileiraAumentoMoral();
         
         switch (fileira){
             case 1:
@@ -237,15 +231,11 @@ public class Efeito {
             System.out.println("Carta já foi usada!");
         }
         else {
-            try {
-                Scanner teclado = new Scanner(System.in);
-                boolean escolha;
-                
+            try {                
                 carta.setUsada(true);
                 
                 Carta[] mao = j.getJogadorAtual().getMao();
                 List<Carta> cemiterio = tab.getCampoDoJogador(j.getJogadorEmEspera()).getCemiterio();
-                
                 
                 switch (carta.getId()){
                     case 001:
@@ -258,13 +248,8 @@ public class Efeito {
                         break;
                         
                     case 002:
-                        for (int i=0; i<cemiterio.size();i++){
-                            cemiterio.get(i);
-                            escolha = teclado.nextBoolean();
-                            if (escolha == true){
-                                tab.getCampoDoJogador(j.getJogadorAtual()).addCarta(cemiterio.get(i));
-                            }
-                        }
+                        int opcao = j.getInputResgataCemiterio();
+                        tab.getCampoDoJogador(j.getJogadorAtual()).addCarta(cemiterio.get(opcao));
                         break;
                         
                     case 003:
@@ -320,12 +305,12 @@ public class Efeito {
     
     public void CartaEspecial(CartaEspecial carta){
         
-        Scanner teclado = new Scanner(System.in);
+        
         boolean escolha=false;
-        int novafileira;
+        
         
         //nova fileira informada pelo usuario.
-        novafileira = teclado.nextInt();
+        int novafileira = j.getInputFileiraCartaEspecial();
         carta.setFileira(novafileira);
         
         Carta[] f;        

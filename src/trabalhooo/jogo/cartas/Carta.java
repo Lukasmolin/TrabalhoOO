@@ -107,6 +107,19 @@ public abstract class Carta {
      * Retorna o efeito da carta
      */
      public abstract void getEfeito(Efeito efeito);
+
+
+     //Override para que o metodo remove da lista identifique como cartas iguais
+     @Override
+     public boolean equals(Object obj){
+        if(obj instanceof Carta){
+            Carta compara = (Carta)obj;
+            if(compara.nome.equals(this.nome)){
+                return true;
+            }
+        }
+        return false;
+     }
     
     
     

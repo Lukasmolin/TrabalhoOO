@@ -104,6 +104,7 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
 
     private void atualizaCartas(){
         String cartasNaMao = Integer.toString(mao.quantidade());
+        System.out.println("CartasRestantes: "+cartasNaMao);
         this.cartasRestantes_info.setText(cartasNaMao);
     }
 
@@ -136,5 +137,10 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
         if(gui != null){            
             gui.jogadaFeita(this.nome, nomeCartaJogada);
         }
+    }
+
+    @Override
+    public String getNome() {
+        return this.nome;
     }
 }

@@ -22,6 +22,12 @@ public class Tabuleiro {
         this.jogadorDois = jogadorDois;
         campoUm = new Campo(jogo);
         campoDois = new Campo(jogo);
+        setLideres();
+    }
+
+    private void setLideres(){
+        campoUm.setLider(jogadorUm.getLider());
+        campoDois.setLider(jogadorDois.getLider());
     }
     
     /**
@@ -53,14 +59,8 @@ public class Tabuleiro {
         }
         return null; 
     }
+
     
-    /**
-     * 
-     */
-    public void setLider(){
-        campoUm.setLider(jogadorUm.getLider());
-        campoDois.setLider(jogadorDois.getLider());
-    }
     
     
     

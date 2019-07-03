@@ -112,8 +112,8 @@ public class TelaConfig extends JFrame implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(iniciar)){
-            iniciaJogo();
             setVisible(false);
+            iniciaJogo();
         } else if (e.getSource().equals(editarCaminho)) {
             if (caminho.showOpenDialog(botoes_panel) == JFileChooser.APPROVE_OPTION){
                 control.setCaminho(caminho.getSelectedFile().toString());

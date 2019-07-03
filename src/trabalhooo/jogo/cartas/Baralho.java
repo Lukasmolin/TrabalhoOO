@@ -14,10 +14,10 @@ import java.util.List;
  * @author izabe
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
-public final class Baralho {
+public class Baralho {
     private List<Carta> baralho; 
     private Faccao faccao;
-    private Carta lider;
+    private CartaLider lider;
     private boolean comecou = false; 
     private int troca = 0; //Trocas d ecarta iniciais
     
@@ -29,6 +29,18 @@ public final class Baralho {
         this.faccao = faccao;
         reiniciarBaralho(faccao);
     }
+
+    /**
+     * retorna a Faccao do baralho do jogador
+     * @return
+     */
+    public Faccao getFaccao(){
+        return this.faccao;
+    }
+
+    public CartaLider getLider(){
+        return this.lider;
+    }
     
     /**
      * Reinicia o baralho com uma facção
@@ -39,9 +51,11 @@ public final class Baralho {
         switch (faccao){
             case MONSTROS:
                 baralho = getMonstros(getNeutro());
+                this.lider = new CartaLider("Eredin: King of the Wild Hunt",faccao,4,"Leader",001);
                 break;
             case NILFGAARD:
                 baralho = getNilfgaard(getNeutro());
+                this.lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
                 break;
             case REINO_DO_NORTE:
                 baralho = getReinosDoNorte(getNeutro());
@@ -90,15 +104,7 @@ public final class Baralho {
     public List<Carta> getBaralho(){
         return this.baralho;
     }
-    
-    /**
-     * 
-     * @return 
-     */
-    public Carta getLider(){
-        return this.lider;
-    }
-    
+
     /**
      * Gera um baralho novo da Facção Monstros
      * @return Lista de cartas contendo o baralho
@@ -152,7 +158,6 @@ public final class Baralho {
         monstros.add(new CartaSimples("wyvern",faccao,2,"Wyvern",2));
         
         Collections.shuffle(monstros); //Mistura a lista
-        monstros.add(0, lider);
         return monstros;
     }  
     
@@ -202,7 +207,6 @@ public final class Baralho {
         nilfgaard.add(new CartaSimples("Zerrikanian Fire Scorpion",faccao,3,"Unit",5));
         
         Collections.shuffle(nilfgaard); //Mistura a lista
-        nilfgaard.add(0, lider);
         return nilfgaard;
     }
     
@@ -249,7 +253,6 @@ public final class Baralho {
         reinosdonorte.add(new CartaSimples("Síle de Tansarville",faccao,2,"Unit",5));
 
         Collections.shuffle(reinosdonorte); //Mistura a lista
-        reinosdonorte.add(0, lider);
         return reinosdonorte;
     }
     

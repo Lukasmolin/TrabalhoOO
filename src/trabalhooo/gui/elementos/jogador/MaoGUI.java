@@ -1,21 +1,24 @@
 package trabalhooo.gui.elementos.jogador;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import trabalhooo.gui.Gui;
 import trabalhooo.gui.elementos.carta.CartaGUI;
 
-public class MaoGUI extends JFrame implements MouseListener {
-    //Serializable
+public class MaoGUI extends JFrame implements MouseListener{
+    // Serializable
     private static final long serialVersionUID = 1L;
 
     private static final double PROPORCAO_ALTURA = 0.20;
@@ -27,17 +30,17 @@ public class MaoGUI extends JFrame implements MouseListener {
 
     public MaoGUI() {
         inicializaTamanho();
-
         painelExterno.add(painel, BorderLayout.CENTER);
         painel.setLayout(new FlowLayout());
+        painel.addMouseListener(this);
         painel.add(new CartaGUI());
         add(painelExterno);
     }
 
-    private void inicializaTamanho(){
+    private void inicializaTamanho() {
         Dimension dimensaoGui = Gui.getDimensao();
-        int altura = (int)(dimensaoGui.getHeight()*PROPORCAO_ALTURA); 
-        int largura = (int)(dimensaoGui.getWidth());
+        int altura = (int) (dimensaoGui.getHeight() * PROPORCAO_ALTURA);
+        int largura = (int) (dimensaoGui.getWidth());
         tamanho = new Dimension(largura, altura);
         setMinimumSize(tamanho);
         setMaximumSize(tamanho);
@@ -64,6 +67,7 @@ public class MaoGUI extends JFrame implements MouseListener {
 
     /**
      * Preenche a lista e o painel com as novas cartas
+     * 
      * @param mao Array de cartas não null
      * @throws Exception Se algum elemento for null
      */
@@ -71,8 +75,10 @@ public class MaoGUI extends JFrame implements MouseListener {
         this.mao.clear();
         painel.removeAll();
         for (int i = 0; i < mao.length; i++) {
-            if (mao[i] == null) { throw new NullPointerException("CartaGUI Null na Mao!" + i); }
-            
+            if (mao[i] == null) {
+                throw new NullPointerException("CartaGUI Null na Mao!" + i);
+            }
+
             this.mao.add(mao[i]);
             mao[i].addMouseListener(this);
             painel.add(mao[i]);
@@ -90,6 +96,7 @@ public class MaoGUI extends JFrame implements MouseListener {
 
     /**
      * Retorna a quantidade de cartas nessa mão
+     * 
      * @return Quantidade de cartas nessa mão
      */
     public int quantidade() {
@@ -98,33 +105,42 @@ public class MaoGUI extends JFrame implements MouseListener {
 
     /**
      * Adiciona um Listener a esta mao
+     * 
      * @param jogador Ouvinte
      */
-    public void setListener(MaoGUIListener jogador){
+    public void setListener(MaoGUIListener jogador) {
         this.jogador = jogador;
+        this.setTitle(jogador.getNome());
     }
 
-
-    //Eventos MouseListener
+    // Eventos MouseListener
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(jogador != null && e.getSource() instanceof CartaGUI){
-            CartaGUI fonte = (CartaGUI)e.getSource();
-            jogador.jogadaFeita(fonte.getNome());
+        if (jogador != null && e.getSource() instanceof CartaGUI) {
+            CartaGUI fonte = (CartaGUI) e.getSource();
             this.setVisible(false);
+            jogador.jogadaFeita(fonte.getNome());
+        } else if(e.getSource() == painel){            
+            this.setVisible(false);
+            jogador.jogadaFeita("");
         }
+
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}   
+    public void mouseExited(MouseEvent e) {
+    }
 
 }

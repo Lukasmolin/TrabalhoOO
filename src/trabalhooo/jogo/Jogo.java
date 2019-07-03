@@ -9,15 +9,15 @@ import java.util.Scanner;
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
 public class Jogo {
-    private Jogador jogadorUm, jogadorDois;
+    private boolean jogadaRecemPassada = false;
+    private boolean partidaIniciada = false;
+    private boolean repeteJogada = false;
+    private JogoListener control;
+    private Jogador jogadorUm, jogadorDois, atual;
     private Tabuleiro tabuleiro;
-    private int contaJogadas = 0;
-    private boolean fimdeJogo = false;
-    private boolean fimdeRodada = false;
-    private Jogador vencedor;
-  
+
     /**
-     * 
+     * Contrutor
      * @param nomeJogadorUm Nome do primeiro jogador
      * @param nomeJogadorDois Nome do segundo jogador
      */
@@ -28,7 +28,7 @@ public class Jogo {
     }
 
     /**
-     * 
+     * Contrutor
      * @param nomeJogadorUm Nome do primeiro jogador
      * @param nomeJogadorDois Nome do segundo jogador
      */
@@ -37,9 +37,9 @@ public class Jogo {
         jogadorDois = JogadorDois;
         tabuleiro = new Tabuleiro(jogadorUm, jogadorDois, this);
     }
-    
-    public Jogador getVencedor(){
-        return this.vencedor;
+
+    public void setListener(JogoListener control){
+        this.control = control;
     }
     
     public Jogador getJogadorUm(){
@@ -48,6 +48,10 @@ public class Jogo {
     
     public Jogador getJogadorDois(){
         return this.jogadorDois;
+    }
+
+    public Tabuleiro getTabuleiro(){
+        return this.tabuleiro;
     }
     
     /**
@@ -80,7 +84,6 @@ public class Jogo {
      */
     public void setFaccaoJogadorDois(Faccao faccao){              
         jogadorDois.setBaralho(faccao);
-        
     }
     
     /**
@@ -119,162 +122,144 @@ public class Jogo {
     
     /**
      * Determina jogador inicial
-     * @return 
      */
-    public Jogador jogadorInicial(){
-        
+    private void sorteiaJogadorInicial(){
         Random random = new Random();
         int sorteio = random.nextInt(2);
         
-        if (sorteio==0)
-            return jogadorUm;
-            
-        if (sorteio==1)
-            return jogadorDois;
+        if (sorteio == 0)
+            this.atual = jogadorUm;
 
-        return null;
+        if (sorteio == 1)
+            this.atual = jogadorDois;
     }
-    
+
+    public void iniciaPartida() throws Exception{
+        if(!estaPronto()) { throw new Exception("O jogo ainda não está pronto pra começar"); }
+        sorteiaJogadorInicial();
+        partidaIniciada = true;
+        if(control != null)
+            control.JogoPronto();
+    }
+
     /**
-     * Inicia o jogo com 0 jogadas, muda o jogador ativo conforme as jogadas avançam
-     * @return o jagador ativo no momento
+     * Retorna o jogador que está fazendo a jogada
+     * @return atual
      */
     public Jogador getJogadorAtual(){
-        Jogador jogadorInicial = jogadorInicial();
-        if(jogadorInicial == jogadorUm){
-            while (fimdeJogo==false){
-                while (fimdeRodada==false){
-                    if(contaJogadas%2 == 0){
-                        return jogadorUm;
-                    }
-                    else 
-                        return jogadorDois;
-                }
-            }
-        }
-        else 
-            while (fimdeJogo==false){
-                while (fimdeRodada==false){
-                    if(contaJogadas%2 == 0){
-                        return jogadorDois;
-                    }
-                    else 
-                        return jogadorUm;
-                }
-            }
-        return null;     
+        return this.atual;
     }
-    
+
     /**
-     * Retorna o jogador em espera
-     * @return 
+     * Retorna o jogador que não estã jogando
+     * @return
      */
     public Jogador getJogadorEmEspera(){
-        Jogador jogadorInicial = jogadorInicial();
-        if(jogadorInicial == jogadorUm){
-            while (fimdeJogo==false){
-                while (fimdeRodada==false){
-                    if(contaJogadas%2 == 0){
-                        return jogadorDois;
-                    }
-                    else 
-                        return jogadorUm;
-                }
+        if(jogadorUm.equals(atual))
+            return jogadorDois;
+        else
+            return jogadorUm;
+    }
+
+    /**
+     * 
+     * @param jogador
+     * @param nomeCarta
+     * @throws Exception Se a partida nao foi iniciada ou se o Jogador não for o atual
+     * @throws Exception Se o Jogador atual não possuir a carta
+     * @throws Exception Se for uma carta lider já usada
+     */
+    public void fazJogada(String jogador, String nomeCarta) throws Exception {
+        if(!partidaIniciada) { throw new Exception("A partida não foi iniciada"); }
+        if(!jogador.equals(atual.getNome())) { throw new Exception("Esse jogador não é o atual"); }
+        if(nomeCarta.equals("")){            
+            passaJogada(jogador);
+            jogadaRecemPassada = true;
+        } else {
+            jogadaRecemPassada = false;
+            Campo campo = tabuleiro.getCampoDoJogador(atual);
+            campo.addCarta(atual.jogaCarta(nomeCarta));
+            if(!repeteJogada){
+                trocaAtual();
             }
         }
-        else 
-            while (fimdeJogo==false){
-                while (fimdeRodada==false){
-                    if(contaJogadas%2 == 0){
-                        return jogadorUm;
-                    }
-                    else 
-                        return jogadorDois;
-                }
-            }
-        return null;     
-    }
-    
-    public Tabuleiro  getTabuleiro(){
-        return this.tabuleiro;
-    }
-    
-    public boolean verificaVidas(){
-        if (jogadorUm.GetVidas()==0){
-            vencedor = jogadorUm;
-            return true;
-        } else if(jogadorDois.GetVidas()==0){
-            vencedor = jogadorDois;
-            return true;
-        }
-        else 
-            return false;
-    }
-    
-    public boolean verificaRodada(){
-        if(jogadorUm.getPassou()==true && jogadorDois.getPassou()==true){
-            return true;
-        }
-        else 
-            return false;
-    }
-    
-    public Carta escolheCarta(Jogador atual){
-        boolean escolha;
-        Scanner teclado = new Scanner(System.in);
-        
-        for (int i=0;i<atual.getMao().length;i++){
-            Carta escolhida = atual.getMao()[i];
-            escolha  = teclado.nextBoolean();
-            if (escolha==true){
-                return escolhida;
-            }
-        }
-        return null;
-    }
-    
-    public void verificaVencedorRodada (Jogo novoJogo) throws Exception{
-        if (novoJogo.getJogadorUm().GetVidas() > novoJogo.getJogadorDois().GetVidas()){
-            novoJogo.getJogadorDois().perdeVida();
-        }
-        else if (novoJogo.getJogadorDois().GetVidas() > novoJogo.getJogadorUm().GetVidas()){
-            novoJogo.getJogadorUm().perdeVida();
-        }
-        else 
-            novoJogo.getJogadorUm().perdeVida();
-            novoJogo.getJogadorDois().perdeVida();
-    }
-    
-    public void jogo(Jogo novoJogo) throws Exception{
-       
-        boolean termina=false;
-        do{
-            Rodada(novoJogo);
-            novoJogo.contaJogadas++;
-            if (novoJogo.verificaVidas()==true){
-               termina=true;
-            }
-            
-        } while(termina==false);
         
     }
-    
-    public static void Rodada(Jogo novoJogo) throws Exception{
-       
-        Scanner teclado = new Scanner(System.in);
-        
-        do{
-            
-            boolean passa;
-            passa = teclado.nextBoolean();
-            if (passa==false){
-                novoJogo.getJogadorAtual().jogaCarta(novoJogo.escolheCarta(novoJogo.getJogadorAtual()));
-                novoJogo.getJogadorAtual().setPassou(false);
+
+    //Troca o jogoador atuante
+    private void trocaAtual(){
+        if(atual.equals(jogadorUm)){
+            atual = jogadorDois;
+        } else if (atual.equals(jogadorDois)) {
+            atual = jogadorUm;
+        }
+    }
+
+    /**
+     * Passa a jogada ou encerra uma jogada multipla
+     * @param jogador
+     */
+    private void passaJogada(String jogador){        
+        trocaAtual();
+        if(jogadaRecemPassada){
+            try {
+                encerraRodada();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-            else 
-                novoJogo.getJogadorAtual().setPassou(true);
-                novoJogo.verificaRodada();
-                novoJogo.verificaVencedorRodada(novoJogo);
-        } while (novoJogo.verificaRodada()==true);
+        } else {
+            if(!repeteJogada){
+                repeteJogada = true;
+            } else {
+                repeteJogada = false;
+            }
+        }        
+    }
+
+    private void encerraRodada() throws Exception{
+        repeteJogada = false;
+        jogadaRecemPassada = false;
+        int pontuacaoUm = tabuleiro.getCampoUm().getPontuacaoGeral();
+        int pontuacaoDois = tabuleiro.getCampoDois().getPontuacaoGeral();
+        if(pontuacaoUm > pontuacaoDois){
+            jogadorUm.perdeVida();   
+        } else if (pontuacaoDois > pontuacaoUm){
+            jogadorDois.perdeVida();
+        } else {
+            jogadorUm.perdeVida();
+            jogadorDois.perdeVida();
+        }
+        tabuleiro.getCampoUm().limpaCampo();
+        tabuleiro.getCampoDois().limpaCampo();
+    }
+
+    /**
+     * Retorna o jogador atual numericamente
+     * @return Jogador atual ou -1 se nenhum for atual
+     */
+    public int getNumJogadorAtual(){
+        if(atual.equals(jogadorUm)){
+            return 1;
+        } else if(atual.equals(jogadorDois)){
+            return 2;
+        }
+        return -1;
+    }
+
+    //Metodos nao utilizados
+    public int getInputFileiraCartaAgil(){
+       return 0;
+    }
+
+    public int getInputFileiraAumentoMoral(){
+        return 0;
+    }
+
+    public int getInputResgataCemiterio(){
+        return 0;
+    }
+
+    public int getInputFileiraCartaEspecial(){
+        return 0;
     }
 }

@@ -38,8 +38,8 @@ public class Campo {
     private void inicializaFileiras(){
         cemiterio = new ArrayList<>();
         campo = new Fileira[3];
-        for(Fileira f : campo){
-            f = new Fileira(jogo);
+        for(int i = 0; i < campo.length; i++){
+            campo[i] = new Fileira(jogo);
         }
     }
     
@@ -76,6 +76,7 @@ public class Campo {
         for(Fileira f : campo){
             pontuacao += f.getPontuacao();
         }
+        
         return pontuacao;
     }
     
@@ -142,5 +143,21 @@ public class Campo {
      */
     public boolean verificaUsoLider(CartaLider carta){
         return carta.getUsada();
+    }
+
+    public Fileira getFileiraParaTestes(int fileira){
+        return campo[fileira];
+    }
+
+    /**
+     * Limpa todas as cartas de um campo
+     * @throws Exception se a carta não existir ou se a carta for null
+     */
+    public void limpaCampo() throws Exception{
+        for(Fileira f : campo){
+            for(Carta c : f.getCartas()){
+                cemiterio.add(f.queimaCarta(c));
+            }
+        }
     }
 }

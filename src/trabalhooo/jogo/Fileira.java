@@ -33,7 +33,7 @@ public class Fileira {
      * @param carta a ser adicionada
      */
     public void add(Carta carta){
-        carta.getEfeito(new Efeito(jogo));
+        //carta.getEfeito(new Efeito(jogo));
         fileira.add(carta);
         atualizaPontuacao();
     }
@@ -51,11 +51,11 @@ public class Fileira {
      * Retorna a pontuação da fileira
      * @return pontuação total da fileira
      */
-    public int getPontuacao(){
-        
+    public int getPontuacao(){        
         if (this.temClima==true){
             return this.fileira.size();
         }
+        System.out.println("Pontuacao:");
         return this.pontuacao;
     }
     
@@ -68,7 +68,7 @@ public class Fileira {
     public Carta queimaCarta(Carta carta) throws Exception{
         if(carta == null) { throw new Exception("Carta inválida: Null!"); }
         if(!fileira.remove(carta)) { throw new Exception("Carta não existente na fileira!"); }
-        return carta;        
+        return carta;
     }
     
     /**

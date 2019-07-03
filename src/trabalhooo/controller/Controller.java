@@ -1,11 +1,14 @@
 package trabalhooo.controller;
 
+import trabalhooo.gui.CartaInfo;
 import trabalhooo.gui.Gui;
 import trabalhooo.gui.GuiListener;
 import trabalhooo.jogo.Jogo;
+import trabalhooo.jogo.JogoListener;
+import trabalhooo.jogo.cartas.Carta;
 import trabalhooo.jogo.cartas.Faccao;
 
-public class Controller implements GuiListener{
+public class Controller implements GuiListener, JogoListener{
 
     private Gui gui;
     private Jogo jogo;
@@ -37,16 +40,21 @@ public class Controller implements GuiListener{
     public void iniciarPartida(String nomeUm, String nomeDois, int faccaoUm, int faccaoDois, int resolucao){
         inicializaJogo(nomeUm, nomeDois, faccaoUm, faccaoDois);
         inicializaGui(nomeUm, nomeDois, this.resolucao[resolucao][0], this.resolucao[resolucao][1]);
-        primeiraJogada();
+        atualizaGui();
         gui.setVisible(true);
+        fazJogada();
     }
-
-    public void setCaminho(String caminho){
-        try{
-            Gui.SetCaminho(caminho);
-        } catch (Exception ex) {
+    
+    private void inicializaJogo(String nomeUm, String nomeDois, int faccaoUm, int faccaoDois){
+        jogo = new Jogo(nomeUm, nomeDois);
+        jogo.getJogadorUm().setBaralho(converteFaccao(faccaoUm));
+        jogo.getJogadorDois().setBaralho(converteFaccao(faccaoDois));
+        try {
+            jogo.iniciaPartida();
+        } catch (Exception ex){
             ex.printStackTrace();
         }
+        
     }
 
     private void inicializaGui(String nomeUm, String nomeDois, int largura, int altura){
@@ -54,15 +62,61 @@ public class Controller implements GuiListener{
         gui.setGuiListener(this);
     }
 
-    private void inicializaJogo(String nomeUm, String nomeDois, int faccaoUm, int faccaoDois){
-        jogo = new Jogo(nomeUm, nomeDois);
-        jogo.getJogadorUm().setBaralho(converteFaccao(faccaoUm));
-        jogo.getJogadorDois().setBaralho(converteFaccao(faccaoDois));
-        thread.start();        
+    private void atualizaGui(){
+        try {
+            atualizaJogadores();
+            atualizaCampo();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
-    private void primeiraJogada(){
+    private void atualizaJogadores() throws Exception{
+        gui.setVidaJogadorUm(Integer.toString(jogo.getJogadorUm().GetVidas()));
+        gui.setVidaJogadorDois(Integer.toString(jogo.getJogadorDois().GetVidas()));
+        gui.setFaccaoJogadorUm(converteFaccao(jogo.getJogadorUm().getFaccao()));
+        gui.setFaccaoJogadorDois(converteFaccao(jogo.getJogadorDois().getFaccao()));
+        gui.setMaoUm(converteCartas(jogo.getJogadorUm().getMao()));
+        gui.setMaoDois(converteCartas(jogo.getJogadorDois().getMao()));
+        gui.setPontosJogadorUm(Integer.toString(jogo.getTabuleiro().getCampoUm().getPontuacaoGeral()));        
+        gui.setPontosJogadorDois(Integer.toString(jogo.getTabuleiro().getCampoDois().getPontuacaoGeral()));
+    }
 
+    private void atualizaCampo() throws Exception{
+        gui.setCampoUm(new CartaControl[][]{
+            converteCartas(jogo.getTabuleiro().getCampoUm().getFileiraBalistas()),
+            converteCartas(jogo.getTabuleiro().getCampoUm().getFileiraArqueiros()),
+            converteCartas(jogo.getTabuleiro().getCampoUm().getFileiraEspadachins())
+        });
+        gui.setCampoDois(new CartaControl[][]{
+            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraBalistas()),
+            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraArqueiros()),
+            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraEspadachins())
+        });
+    }
+
+    private void fazJogada(){
+        int atual = jogo.getNumJogadorAtual();
+        if(atual == 1){
+            gui.jogaUm();
+        } else if(atual == 2){
+            gui.jogaDois();
+        }
+    }
+
+    private String converteFaccao(Faccao faccao){
+        switch(faccao){
+            case MONSTROS:
+                return "Monstros";
+            case NILFGAARD:
+                return "Nilfgaard";
+            case REINO_DO_NORTE:
+                return "Reino do Norte";
+            case SCOIATAEL:
+                return "ScoiaTael";
+            default:
+                return null;
+        }
     }
 
     private Faccao converteFaccao(int faccao){
@@ -80,12 +134,40 @@ public class Controller implements GuiListener{
         }
     }
 
+    private CartaControl[] converteCartas(Carta[] cartas){
+        CartaControl[] retorno = new CartaControl[cartas.length];
+        for(int i = 0; i < cartas.length; i++){
+            retorno[i] = converteCarta(cartas[i]);
+        }
+        return retorno;
+    }
 
-    
+    private CartaControl converteCarta(Carta c){
+        return new CartaControl(c.getNome(), c.getDescricao(), Integer.toString(c.getPontuacao()));
+    }
+
+    public void setCaminho(String caminho){
+        try{
+            Gui.SetCaminho(caminho);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     //GuiListener
     @Override
     public void jogadaFeita(String nomeJogador, String nomeCartaJogada) {
+        try{
+            jogo.fazJogada(nomeJogador, nomeCartaJogada);
+        } catch (Exception ex){
+            ex.printStackTrace();;
+        }
+        fazJogada();
+        atualizaGui();
+    }
+
+    @Override
+    public void JogoPronto() {
 
     }
 }
