@@ -160,4 +160,16 @@ public class Campo {
             }
         }
     }
+
+    public int getPontuacaoEspadachins(){
+        return campo[FILEIRA_ESPADACHINS].getPontuacao();
+    }
+    
+    public int getPontuacaoArqueiros(){
+        return campo[FILEIRA_ARQUEIROS].getPontuacao();
+    }
+    
+    public int getPontuacaoBalistas(){
+        return campo[FILEIRA_BALISTAS].getPontuacao();
+    }
 }

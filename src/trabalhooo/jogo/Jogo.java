@@ -222,9 +222,9 @@ public class Jogo {
         int pontuacaoUm = tabuleiro.getCampoUm().getPontuacaoGeral();
         int pontuacaoDois = tabuleiro.getCampoDois().getPontuacaoGeral();
         if(pontuacaoUm > pontuacaoDois){
-            jogadorUm.perdeVida();   
+            jogadorDois.perdeVida();   
         } else if (pontuacaoDois > pontuacaoUm){
-            jogadorDois.perdeVida();
+            jogadorUm.perdeVida();
         } else {
             jogadorUm.perdeVida();
             jogadorDois.perdeVida();

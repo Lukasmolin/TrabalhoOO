@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import trabalhooo.jogo.cartas.Carta;
 import trabalhooo.jogo.cartas.CartaPontuada;
-import trabalhooo.jogo.cartas.Efeito;
+//import trabalhooo.jogo.cartas.Efeito;
 
 /**
  *
@@ -68,6 +68,7 @@ public class Fileira {
     public Carta queimaCarta(Carta carta) throws Exception{
         if(carta == null) { throw new Exception("Carta inválida: Null!"); }
         if(!fileira.remove(carta)) { throw new Exception("Carta não existente na fileira!"); }
+        atualizaPontuacao();
         return carta;
     }
     

@@ -114,7 +114,7 @@ public class Baralho {
         List<Carta> monstros = new ArrayList<>();
         monstros.addAll(neutro);
         Faccao faccao = Faccao.MONSTROS;
-        Carta lider = new CartaLider("Eredin: King of the Wild Hunt",faccao,4,"Leader",001);
+        //Carta lider = new CartaLider("Eredin: King of the Wild Hunt",faccao,4,"Leader",001);
         monstros.add(new CartaCoragem("Arachas I",faccao,1,"Arachas",4));
         monstros.add(new CartaCoragem("Arachas II",faccao,1,"Arachas",4));
         monstros.add(new CartaCoragem("Arachas III",faccao,1,"Arachas",4));        
@@ -169,7 +169,7 @@ public class Baralho {
         List<Carta> nilfgaard = new ArrayList<>();
         nilfgaard.addAll(neutro);
         Faccao faccao = Faccao.NILFGAARD;
-        Carta lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
+        //Carta lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
         nilfgaard.add(new CartaSimples("Albrich",faccao,2,"Unit",2));
         nilfgaard.add(new CartaSimples("Assire var Anahid",faccao,2,"Unit",6));
         nilfgaard.add(new CartaSimples("Black Infantry Archer I",faccao,2,"Unit",10));
@@ -218,7 +218,7 @@ public class Baralho {
         List<Carta> reinosdonorte = new ArrayList<>();
         reinosdonorte.addAll(neutro);
         Faccao faccao = Faccao.REINO_DO_NORTE;
-        Carta lider = new CartaLider("Foltest: The Siegemaster",faccao,4,"Leader",003);
+        //Carta lider = new CartaLider("Foltest: The Siegemaster",faccao,4,"Leader",003);
         reinosdonorte.add(new CartaHeroi("Esterad",faccao,1,"Hero",10));
         reinosdonorte.add(new CartaEloForte("Blue Stripes Commando",faccao,1,"Unit",4));
         reinosdonorte.add(new CartaEloForte("Blue Stripes Commando",faccao,1,"Unit",4));

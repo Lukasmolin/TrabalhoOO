@@ -1,6 +1,5 @@
 package trabalhooo.controller;
 
-import trabalhooo.gui.CartaInfo;
 import trabalhooo.gui.Gui;
 import trabalhooo.gui.GuiListener;
 import trabalhooo.jogo.Jogo;
@@ -89,9 +88,19 @@ public class Controller implements GuiListener, JogoListener{
             converteCartas(jogo.getTabuleiro().getCampoUm().getFileiraEspadachins())
         });
         gui.setCampoDois(new CartaControl[][]{
-            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraBalistas()),
+            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraEspadachins()),
             converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraArqueiros()),
-            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraEspadachins())
+            converteCartas(jogo.getTabuleiro().getCampoDois().getFileiraBalistas())
+        });
+        gui.setPontosCampoUm(new String []{
+            Integer.toString(jogo.getTabuleiro().getCampoUm().getPontuacaoBalistas()),
+            Integer.toString(jogo.getTabuleiro().getCampoUm().getPontuacaoArqueiros()),
+            Integer.toString(jogo.getTabuleiro().getCampoUm().getPontuacaoEspadachins())
+        });
+        gui.setPontosCampoDois(new String []{
+            Integer.toString(jogo.getTabuleiro().getCampoDois().getPontuacaoEspadachins()),
+            Integer.toString(jogo.getTabuleiro().getCampoDois().getPontuacaoArqueiros()),
+            Integer.toString(jogo.getTabuleiro().getCampoDois().getPontuacaoBalistas())
         });
     }
 
@@ -169,5 +178,11 @@ public class Controller implements GuiListener, JogoListener{
     @Override
     public void JogoPronto() {
 
+    }
+
+    @Override
+    public void vencedor(String jogadorVencedor) {
+        gui.setVisible(false);
+        inicia();
     }
 }

@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package trabalhooo;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import trabalhooo.controller.Controller;
 import trabalhooo.jogo.Campo;
 import trabalhooo.jogo.Fileira;
