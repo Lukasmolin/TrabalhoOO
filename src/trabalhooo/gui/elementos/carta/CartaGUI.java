@@ -79,15 +79,11 @@ public class CartaGUI extends JPanel{
 
     private void valida(String nome, String descricao, String pontuacao) throws Exception{
         if(nome == null) { throw new NullPointerException ("Nome Null"); }
-        if(descricao == null) { throw new NullPointerException ("Descricao Null! Carta: " +nome); }
         if(pontuacao == null) { throw new NullPointerException ("Pontuacao Null! Carta: " +nome); }
     }
 
     //Inicializa os elementos Swing e adicionam ao JPanel carta
     private void inicializa(String nome, String descricao, String pontuacao) throws Exception{
-        if(!descricao.equals("")){
-            setToolTipText(descricao);
-        }
         this.nome = nome;
         nome_info.setText(nome);
         pontuacao_info.setText(pontuacao);

@@ -1,32 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhooo.jogo.cartas;
-
-import trabalhooo.jogo.Tabuleiro;
-import trabalhooo.jogo.Fileira;
-import trabalhooo.jogo.Jogador;
-import trabalhooo.jogo.Campo;
-
 /**
  *
  * @author izabe
  */
-/*
-Essa classe vai se tornar abstrata no futuro
-*/
 public abstract class Carta {
     
     private final String nome;
     private final String tipo;
-    private String descricao;
+    protected String descricao;
     private Faccao faccao;
-    private Tabuleiro tab;
     private int fileira;
     private int pontuacao;
-    
         
     /**
      * Cria um objeto carta com os parametros passados
@@ -89,6 +73,10 @@ public abstract class Carta {
     public void setDescricao(String descricao){
        this.descricao = descricao; 
     }
+
+    public String getDescricao(){
+        return this.descricao;
+    }
     
     /**
      * Retorna o atributo tipo
@@ -96,6 +84,14 @@ public abstract class Carta {
      */
     public String getTipo(){
         return this.tipo;
+    }
+
+    /**
+     * Retorna a faccao da carta
+     * @return
+     */
+    public Faccao getFaccao(){
+        return this.faccao;
     }
     
     /**
@@ -107,12 +103,23 @@ public abstract class Carta {
         return this.nome.equals(carta.nome);
     }
     
-    
-    
     /**
      * Retorna o efeito da carta
      */
      public abstract void getEfeito(Efeito efeito);
+
+
+     //Override para que o metodo remove da lista identifique como cartas iguais
+     @Override
+     public boolean equals(Object obj){
+        if(obj instanceof Carta){
+            Carta compara = (Carta)obj;
+            if(compara.nome.equals(this.nome)){
+                return true;
+            }
+        }
+        return false;
+     }
     
     
     

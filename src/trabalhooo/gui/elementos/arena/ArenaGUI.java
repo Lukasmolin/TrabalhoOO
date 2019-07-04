@@ -1,6 +1,5 @@
 package trabalhooo.gui.elementos.arena;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -19,6 +18,9 @@ import trabalhooo.gui.elementos.carta.CartaGUI;
  * pontuações de ambos os jogadores
  */
 public class ArenaGUI extends JPanel {
+    //Serializable
+    private static final long serialVersionUID = 1L;
+
     private CampoGUI[] campos = new CampoGUI[2];
     private List<CartaGUI> climas = new ArrayList<>();
     private JLabel climas_rotulo = new JLabel("Climas:");

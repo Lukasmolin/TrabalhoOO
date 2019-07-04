@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhooo.jogo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import trabalhooo.jogo.cartas.Baralho;
 import trabalhooo.jogo.cartas.Carta;
+import trabalhooo.jogo.cartas.CartaLider;
 import trabalhooo.jogo.cartas.Faccao;
 
 /**
@@ -20,10 +18,11 @@ public class Jogador {
     
     private String nome;
     private Baralho baralho;
-    private List<Carta> mao;
+    private List<Carta> mao = new ArrayList<>();
+    private CartaLider lider;
+    private boolean usouLider = false;
     private int vidas = 3;
     private boolean pronto = false;
-    private boolean  passou =  false;
     
     /**
      * Contrutor do Jogador
@@ -65,8 +64,8 @@ public class Jogador {
     public void setBaralho(Faccao faccao){
        //Inicia o baralho com a facção
        baralho = new Baralho(faccao);
-       //Retira as 10 primeiras cartas e passa para mão
-       mao = new ArrayList<>();
+       this.lider = baralho.getLider();
+       //Retira as 10 primeiras cartas e passa para mão       
        mao.addAll(java.util.Arrays.asList(baralho.getCartasIniciais()));
        this.pronto = true;
     }
@@ -87,8 +86,7 @@ public class Jogador {
     
     /**
      * Retorna mão atual do jogador
-     * @return Array de Cartas com as cartas na mão do jogador
-     * @throws Exception Se o jogador ainda não estiver pronto
+     * @return Array de Cartas com as cartas na mão do jogador ou null se nao estiver pronto
      */
     public Carta[] getMao(){
         if(pronto){
@@ -105,11 +103,15 @@ public class Jogador {
      * @return a Carta se a jogada foi feita, null se o jogador nao possuir a carta na mao
      * @throws Exception se o jogador não possuir a carta
      */
-    public Carta jogaCarta(Carta carta) throws Exception{
-        if(mao.remove(carta))
-            return carta;
-        else
-            throw new Exception("Erro! A carta não pertence ao jogador!");
+    public Carta jogaCarta(String carta) throws Exception{
+        for(Carta c : mao){
+            if(c.getNome().equals(carta)){
+                Carta cartaJogada = c;
+                mao.remove(cartaJogada);
+                return cartaJogada;
+            }
+        }
+        throw new Exception("Carta inexistente na mao do Jogador!");
     }
     
     /**
@@ -119,24 +121,40 @@ public class Jogador {
     public boolean estaPronto(){
         return this.pronto;
     }
+
+    public boolean liderUsado(){
+        return usouLider;
+    }
     
+    public CartaLider getLider(){
+        return this.lider;
+    }
+
     /**
-     * Retorna o baralho do jogador
-     * @return 
+     * Joga a carta Lider
+     * @return carta lider jogada
+     * @throws Exception se o lider ja foi usado
+     */
+    public CartaLider jogaCartaLider() throws Exception{
+        if(usouLider) { throw new Exception("O lider já foi usado"); }
+        
+        usouLider = true;
+        return this.lider;
+    }
+
+    /**
+     * Retorna o baralho do Jogador
+     * @return baralho do jogador
      */
     public Baralho getBaralho(){
         return this.baralho;
     }
-    
-    public Carta getLider(){
-        return this.baralho.getLider();
-    }
-    
-    public boolean getPassou(){
-        return this.passou;
-    }
-    
-    public void setPassou(boolean b){
-        this.passou = b;
+
+    /**
+     * Retorna a faccao do Jogador
+     * @return faccao
+     */
+    public Faccao getFaccao(){
+        return this.baralho.getFaccao();
     }
 }

@@ -17,10 +17,7 @@ public class RepositorioGUI {
     private static Dimension tamanho;
     private static Map<String, Image> cache = new HashMap<>();
     private RepositorioGUI(){};
-
-    //Temp
-    private static Image img;
-
+    
     /**
      * Seta o caminho da pasta onde estão as imagens do Jogo
      * @param caminho Caminho da pasta
@@ -52,13 +49,25 @@ public class RepositorioGUI {
     public static Image getImagem(String nomeDaCarta) throws Exception{
         if(tamanho == null) { throw new NullPointerException("O tamanho não foi inicializado!"); }
         if(pasta == null) { throw new Exception("O caminho não foi inicializado."); }
-
-        nomeDaCarta = nomeDaCarta.replace(" ", "_");
+        nomeDaCarta = nomeDaCarta.toLowerCase();
+        nomeDaCarta = nomeDaCarta.replace(" ", "_");        
+        File arq = new File(pasta.toString(), nomeDaCarta+".png");
+        Image original = null;
         if(!cache.containsKey(nomeDaCarta)){
-            Image original = ImageIO.read(new File(pasta.toString(), nomeDaCarta+".png"));
+            try {
+                original = ImageIO.read(arq);                
+            } catch (Exception e){
+                try{
+                    original = ImageIO.read(new File(pasta.toString(), "null.png"));
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
             Image escalada = original.getScaledInstance((int)tamanho.getWidth(), (int)tamanho.getHeight(), Image.SCALE_FAST);
-            cache.put(nomeDaCarta, escalada);
+            cache.put(nomeDaCarta, escalada);               
         }
+        
+        
         
         return cache.get(nomeDaCarta);
     }

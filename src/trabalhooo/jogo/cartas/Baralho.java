@@ -14,10 +14,10 @@ import java.util.List;
  * @author izabe
  * @author Lucas Molin <lucasmolin@ice.ufjf.br>
  */
-public final class Baralho {
+public class Baralho {
     private List<Carta> baralho; 
     private Faccao faccao;
-    private Carta lider;
+    private CartaLider lider;
     private boolean comecou = false; 
     private int troca = 0; //Trocas d ecarta iniciais
     
@@ -29,6 +29,18 @@ public final class Baralho {
         this.faccao = faccao;
         reiniciarBaralho(faccao);
     }
+
+    /**
+     * retorna a Faccao do baralho do jogador
+     * @return
+     */
+    public Faccao getFaccao(){
+        return this.faccao;
+    }
+
+    public CartaLider getLider(){
+        return this.lider;
+    }
     
     /**
      * Reinicia o baralho com uma facção
@@ -39,9 +51,11 @@ public final class Baralho {
         switch (faccao){
             case MONSTROS:
                 baralho = getMonstros(getNeutro());
+                this.lider = new CartaLider("Eredin: King of the Wild Hunt",faccao,4,"Leader",001);
                 break;
             case NILFGAARD:
                 baralho = getNilfgaard(getNeutro());
+                this.lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
                 break;
             case REINO_DO_NORTE:
                 baralho = getReinosDoNorte(getNeutro());
@@ -87,18 +101,10 @@ public final class Baralho {
      * 
      * @return retorna o baralho do jogador
      */
-    public List getBaralho(){
+    public List<Carta> getBaralho(){
         return this.baralho;
     }
-    
-    /**
-     * 
-     * @return 
-     */
-    public Carta getLider(){
-        return this.lider;
-    }
-    
+
     /**
      * Gera um baralho novo da Facção Monstros
      * @return Lista de cartas contendo o baralho
@@ -108,7 +114,7 @@ public final class Baralho {
         List<Carta> monstros = new ArrayList<>();
         monstros.addAll(neutro);
         Faccao faccao = Faccao.MONSTROS;
-        Carta lider = new CartaLider("Eredin: King of the Wild Hunt",faccao,4,"Leader",001);
+        //Carta lider = new CartaLider("Eredin: King of the Wild Hunt",faccao,4,"Leader",001);
         monstros.add(new CartaCoragem("Arachas I",faccao,1,"Arachas",4));
         monstros.add(new CartaCoragem("Arachas II",faccao,1,"Arachas",4));
         monstros.add(new CartaCoragem("Arachas III",faccao,1,"Arachas",4));        
@@ -150,6 +156,7 @@ public final class Baralho {
         monstros.add(new CartaCoragem("Vampire Katakan",faccao,1,"Vampire",4));
         monstros.add(new CartaSimples("Werewolf",faccao,1,"Werewolf",5));
         monstros.add(new CartaSimples("wyvern",faccao,2,"Wyvern",2));
+        
         Collections.shuffle(monstros); //Mistura a lista
         return monstros;
     }  
@@ -162,7 +169,7 @@ public final class Baralho {
         List<Carta> nilfgaard = new ArrayList<>();
         nilfgaard.addAll(neutro);
         Faccao faccao = Faccao.NILFGAARD;
-        Carta lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
+        //Carta lider = new CartaLider("Emhyr var Emreis: The Relentless",faccao,4,"Leader",002);
         nilfgaard.add(new CartaSimples("Albrich",faccao,2,"Unit",2));
         nilfgaard.add(new CartaSimples("Assire var Anahid",faccao,2,"Unit",6));
         nilfgaard.add(new CartaSimples("Black Infantry Archer I",faccao,2,"Unit",10));
@@ -198,6 +205,7 @@ public final class Baralho {
         nilfgaard.add(new CartaSimples("Young Emissary I",faccao,1,"Unit",5));
         nilfgaard.add(new CartaSimples("Young Emissary II",faccao,1,"Unit",5));
         nilfgaard.add(new CartaSimples("Zerrikanian Fire Scorpion",faccao,3,"Unit",5));
+        
         Collections.shuffle(nilfgaard); //Mistura a lista
         return nilfgaard;
     }
@@ -210,7 +218,7 @@ public final class Baralho {
         List<Carta> reinosdonorte = new ArrayList<>();
         reinosdonorte.addAll(neutro);
         Faccao faccao = Faccao.REINO_DO_NORTE;
-        Carta lider = new CartaLider("Foltest: The Siegemaster",faccao,4,"Leader",003);
+        //Carta lider = new CartaLider("Foltest: The Siegemaster",faccao,4,"Leader",003);
         reinosdonorte.add(new CartaHeroi("Esterad",faccao,1,"Hero",10));
         reinosdonorte.add(new CartaEloForte("Blue Stripes Commando",faccao,1,"Unit",4));
         reinosdonorte.add(new CartaEloForte("Blue Stripes Commando",faccao,1,"Unit",4));
@@ -243,7 +251,7 @@ public final class Baralho {
         reinosdonorte.add(new CartaSimples("Sabrina Glevissig",faccao,2,"Unit",4));
         reinosdonorte.add(new CartaHeroi("Philippa Eilhart",faccao,2,"Hero",10));
         reinosdonorte.add(new CartaSimples("Síle de Tansarville",faccao,2,"Unit",5));
-              
+
         Collections.shuffle(reinosdonorte); //Mistura a lista
         return reinosdonorte;
     }
@@ -296,12 +304,10 @@ public final class Baralho {
         ScoiaTael.add(new CartaSimples("Riordain",faccao,2,"Unit",1));
         ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit I",faccao,2,"Unit",4));
         ScoiaTael.add(new CartaSimples("Vrihedd Brigade Recruit II",faccao,2,"Unit",4));
-        ScoiaTael.add(new CartaSimples("Toruviel",faccao,2,"Unit",2));
-        
-        
-        
+        ScoiaTael.add(new CartaSimples("Toruviel",faccao,2,"Unit",2));   
         
         Collections.shuffle(ScoiaTael); //Mistura a lista
+        ScoiaTael.add(0, lider);
         return ScoiaTael;
     }
     

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import trabalhooo.jogo.cartas.Carta;
 import trabalhooo.jogo.cartas.CartaPontuada;
-import trabalhooo.jogo.cartas.Efeito;
+//import trabalhooo.jogo.cartas.Efeito;
 
 /**
  *
@@ -21,15 +21,19 @@ public class Fileira {
      */
     private List<Carta> fileira = new ArrayList<>();
     private int pontuacao = 0;
-    private Carta especial;
     private boolean temClima = false;
+    private Jogo jogo;
+
+    public Fileira(Jogo jogo){
+        this.jogo = jogo;
+    }
     
     /**
      * Adiciona carta a esta fileira
      * @param carta a ser adicionada
      */
     public void add(Carta carta){
-        carta.getEfeito(new Efeito());
+        //carta.getEfeito(new Efeito(jogo));
         fileira.add(carta);
         atualizaPontuacao();
     }
@@ -47,11 +51,11 @@ public class Fileira {
      * Retorna a pontuação da fileira
      * @return pontuação total da fileira
      */
-    public int getPontuacao(){
-        
+    public int getPontuacao(){        
         if (this.temClima==true){
             return this.fileira.size();
         }
+        System.out.println("Pontuacao:");
         return this.pontuacao;
     }
     
@@ -64,7 +68,8 @@ public class Fileira {
     public Carta queimaCarta(Carta carta) throws Exception{
         if(carta == null) { throw new Exception("Carta inválida: Null!"); }
         if(!fileira.remove(carta)) { throw new Exception("Carta não existente na fileira!"); }
-        return carta;        
+        atualizaPontuacao();
+        return carta;
     }
     
     /**
@@ -102,7 +107,7 @@ public class Fileira {
      * @param carta 
      */
     public void setEspecial(Carta carta){
-        this.especial = carta;
+        //this.especial = carta;
     }
     
     public void setClima(boolean b){

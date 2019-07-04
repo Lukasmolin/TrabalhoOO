@@ -10,17 +10,17 @@ import trabalhooo.gui.elementos.carta.CartaGUI;
  * Representa o painel de informações de um jogador
  */
 public class JogadorGUI extends JPanel implements MaoGUIListener {
+    //Serializable
+    private static final long serialVersionUID = 1L;
     
     private final String nome;
     private GuiListener gui;
     private MaoGUI mao = new MaoGUI();
 
-    //Elementos mutaveis
+    //Elementos
     private JLabel vidas_info = new JLabel();
     private JLabel cartasRestantes_info = new JLabel();
     private JLabel pontuacao_info = new JLabel();
-
-    //Elementos fixos de cada instancia
     private JLabel nome_info = new JLabel();
     private JLabel baralho_info = new JLabel();
 
@@ -30,6 +30,11 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
     private JLabel baralho_rotulo = new JLabel("Baralho:");
     private JLabel cartasRestantes_rotulo = new JLabel("Cartas Restantes: ");
 
+    public JogadorGUI(String nome){
+        this.nome = nome;
+        inicializar(this.nome);
+    }
+
     /**
      * Contrutor do JogadorGUI
      * @param nome Nome do jogador
@@ -37,7 +42,9 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
      */
     public JogadorGUI(String nome, String baralho, String vidas) {
         this.nome = nome;
-        inicializar(this.nome, baralho, vidas);
+        inicializar(this.nome);
+        setFaccao(baralho);
+        setVidas(vidas);
     }
 
     /**
@@ -45,13 +52,11 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
      * @param nome Nome do jogador
      * @param baralho Baralho escolhido para a partida
      */
-    private void inicializar(String nome, String baralho, String vidas) {
+    private void inicializar(String nome) {
         removeAll();
         mao.setListener(this);
         nome_info.setText(nome);
-        baralho_info.setText(baralho);
         pontuacao_info.setText("0");
-        vidas_info = new JLabel(vidas);
         adicionaElementos();
     }
 
@@ -99,6 +104,7 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
 
     private void atualizaCartas(){
         String cartasNaMao = Integer.toString(mao.quantidade());
+        System.out.println("CartasRestantes: "+cartasNaMao);
         this.cartasRestantes_info.setText(cartasNaMao);
     }
 
@@ -108,6 +114,14 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
      */
     public void setCartasRestantes(String cartasRestantes){
         this.cartasRestantes_info.setText(cartasRestantes);
+    }
+
+    /**
+     * Seta a facção do Jogador
+     * @param faccao
+     */
+    public void setFaccao(String faccao){
+        baralho_info.setText(faccao);
     }
 
     /**
@@ -123,5 +137,10 @@ public class JogadorGUI extends JPanel implements MaoGUIListener {
         if(gui != null){            
             gui.jogadaFeita(this.nome, nomeCartaJogada);
         }
+    }
+
+    @Override
+    public String getNome() {
+        return this.nome;
     }
 }

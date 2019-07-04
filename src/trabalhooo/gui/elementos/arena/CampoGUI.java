@@ -1,9 +1,6 @@
 package trabalhooo.gui.elementos.arena;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -13,6 +10,8 @@ import trabalhooo.gui.elementos.carta.CartaGUI;
  * Classe que agrupa as fileiras de um jogador no tabuelrio
  */
 public class CampoGUI extends JPanel {
+    //Serializable
+    private static final long serialVersionUID = 1L;
     
     private static final int QUANTIDADE = 3;
     private FileiraGUI[] fileiras;

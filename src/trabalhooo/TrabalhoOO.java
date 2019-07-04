@@ -4,46 +4,60 @@
  * and open the template in the editor.
  */
 package trabalhooo;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import trabalhooo.jogo.*;
+import trabalhooo.controller.Controller;
+import trabalhooo.jogo.Campo;
+import trabalhooo.jogo.Fileira;
+import trabalhooo.jogo.Jogador;
 import trabalhooo.jogo.cartas.Carta;
-import trabalhooo.jogo.Tabuleiro;
-import trabalhooo.jogo.cartas.Faccao;
-
 /**
  *
  * @author izabe
  */
 public class TrabalhoOO {
-    
-    
-    
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         try {
-            Jogador p1 = new Jogador("Jose");
-            Jogador p2 = new Jogador("Maria");
-            
-            Jogo novoJogo = new Jogo (p1,p2);
-            
-            novoJogo.setFaccaoJogadorUm(Faccao.MONSTROS);
-            novoJogo.setFaccaoJogadorDois(Faccao.NILFGAARD);
-            
-            novoJogo.jogadorInicial();
-            
-            novoJogo.Jogo(novoJogo);
-            
-            System.out.println("Vencedor é "+novoJogo.getVencedor());
+           Controller c = new Controller();
+           c.inicia();
+           
         } catch (Exception ex) {
-            Logger.getLogger(TrabalhoOO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-            
-        }
-       
     }
+
+    static void testaJogador(Jogador j){
+        System.out.println("Vidas: "+j.GetVidas());
+        System.out.println("Nome: "+j.getNome());
+        System.out.println("EstaPronto: "+j.estaPronto());
+        System.out.println("GetLider: "+j.getLider());
+        System.out.println("GetFaccao: "+j.getFaccao());
+        
+        System.out.println("#############################################");
+        leCartas(j.getMao());
+        
+    }
+
+    static void leCartas(Carta[] c){
+        for(Carta car: c){
+            imprimeCarta(car);
+        }
+    }
+
+    static void imprimeCarta(Carta c){
+        System.out.println("Carta: "+c.getNome()+" Pontuacao: "+c.getPontuacao());
+    }
+
+    static void testaCampo(Campo c){
+        System.out.println(c.getPontuacaoGeral());
+        leCartas(c.getFileiraArqueiros());
+        leCartas(c.getFileiraBalistas());
+        leCartas(c.getFileiraEspadachins());
+
+    }
+
+    static void testaFileira(Fileira f){
+        System.out.println(f.getPontuacao());
+    }
+}
 
 

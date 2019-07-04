@@ -22,11 +22,13 @@ public class Campo {
     private static final byte FILEIRA_ARQUEIROS = 1;
     private static final byte FILEIRA_BALISTAS = 2;
     
+    private Jogo jogo;
     private Fileira[] campo;
-    private List<Carta> cemiterio;   
-    private Carta lider;
+    private List<Carta> cemiterio;
+    private CartaLider lider;
     
-    public Campo(){
+    public Campo(Jogo jogo){
+        this.jogo = jogo;
         inicializaFileiras();
     }
     
@@ -36,8 +38,8 @@ public class Campo {
     private void inicializaFileiras(){
         cemiterio = new ArrayList<>();
         campo = new Fileira[3];
-        for(Fileira f : campo){
-            f = new Fileira();
+        for(int i = 0; i < campo.length; i++){
+            campo[i] = new Fileira(jogo);
         }
     }
     
@@ -74,6 +76,7 @@ public class Campo {
         for(Fileira f : campo){
             pontuacao += f.getPontuacao();
         }
+        
         return pontuacao;
     }
     
@@ -100,23 +103,29 @@ public class Campo {
     }
     
     /**
-     * 
-     * @return Retorna o cemiterio
+     * Retorna o cemiterio
+     * @return cemiterio
      */
-    public List getCemiterio(){
+    public List<Carta> getCemiterio(){
         return this.cemiterio;
     }
     
     /**
-     * 
+     * Seta a carta lider
      * @param carta
      */
     public void setLider (Carta carta){
-        this.lider = carta;
+        if(carta instanceof CartaLider){
+            this.lider = (CartaLider)carta;
+        }        
     }
     
-    public Fileira getFileira(int fileira){
-        
+    /**
+     * Retorna as fileiras do campo
+     * @param fileira desejada
+     * @return fileira escolhida ou null caso não exista
+     */
+    public Fileira getFileira(int fileira){        
         if (fileira==1){
             return this.campo[0];
         } else if (fileira==2){
@@ -133,10 +142,34 @@ public class Campo {
      * @return 
      */
     public boolean verificaUsoLider(CartaLider carta){
-        if (carta.getUsada()==true){
-            return true;
+        return carta.getUsada();
+    }
+
+    public Fileira getFileiraParaTestes(int fileira){
+        return campo[fileira];
+    }
+
+    /**
+     * Limpa todas as cartas de um campo
+     * @throws Exception se a carta não existir ou se a carta for null
+     */
+    public void limpaCampo() throws Exception{
+        for(Fileira f : campo){
+            for(Carta c : f.getCartas()){
+                cemiterio.add(f.queimaCarta(c));
+            }
         }
-        else
-            return false;
+    }
+
+    public int getPontuacaoEspadachins(){
+        return campo[FILEIRA_ESPADACHINS].getPontuacao();
+    }
+    
+    public int getPontuacaoArqueiros(){
+        return campo[FILEIRA_ARQUEIROS].getPontuacao();
+    }
+    
+    public int getPontuacaoBalistas(){
+        return campo[FILEIRA_BALISTAS].getPontuacao();
     }
 }
