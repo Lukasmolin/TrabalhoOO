@@ -13,7 +13,6 @@ Java SE 8
 
 Opções para buildar:
 
-
 1. Ide:
 Criar projeto a partir de arquivos fontes existentes e apontar TrabalhoOO.java como main
 
@@ -22,3 +21,6 @@ Trocar para o branch Gradle
 Na pasta do Projeto executar os comandos:
 Gradle build
 Gradle run
+
+Sobre as imagens:
+Caso seja necessário rodar o programa sem as imagens das cartas originais, basta existir uma imagem nomeada null.png que será usada para qualquer carta que não seja possivel encontrar a imagem na pasta de imagens
